@@ -1,6 +1,6 @@
 import os
-
-from flask import Flask, redirect, render_template, request, url_for
+import json
+from flask import Flask, redirect, render_template, request, url_for, Response
 
 from app.config import Config
 from app.database.connection import init_db
@@ -20,18 +20,86 @@ def create_app():
     @app.route("/review", methods=["GET", "POST"])
     def review():
         if request.method == "POST":
+            review_service = CodeReviewService()
+            source_code = ""
+            filename = "analysis.py"
+            uploaded_files = request.files.getlist("code_files")
+
+            if uploaded_files:
+                results = []
+                for upload in uploaded_files:
+                    if upload and upload.filename:
+                        upload_path = os.path.join(
+                            Config.UPLOAD_FOLDER, upload.filename
+                        )
+                        upload.save(upload_path)
+                        with open(upload_path, "r", encoding="utf-8") as handle:
+                            source_code = handle.read()
+                        result = review_service.process_file_analysis(
+                            upload.filename, source_code
+                        )
+                        results.append(result)
+
+                if results:
+                    aggregate_scores = {
+                        "overall": int(
+                            sum(
+                                item.get("scores", {}).get("overall", 0)
+                                for item in results
+                            )
+                            / len(results)
+                        ),
+                        "security": int(
+                            sum(
+                                item.get("scores", {}).get("security", 0)
+                                for item in results
+                            )
+                            / len(results)
+                        ),
+                        "clean_code": int(
+                            sum(
+                                item.get("scores", {}).get("clean_code", 0)
+                                for item in results
+                            )
+                            / len(results)
+                        ),
+                        "quality": int(
+                            sum(
+                                item.get("scores", {}).get("quality", 0)
+                                for item in results
+                            )
+                            / len(results)
+                        ),
+                    }
+                    aggregated_report = []
+                    aggregated_recommendations = []
+                    total_issues = 0
+                    for item in results:
+                        aggregated_report.extend(item.get("report", []))
+                        aggregated_recommendations.extend(
+                            item.get("summary", {}).get("recommendations", [])
+                        )
+                        total_issues += item.get("summary", {}).get("total_issues", 0)
+                    return render_template(
+                        "dashboard.html",
+                        filename="multi_file_analysis",
+                        scores=aggregate_scores,
+                        confidence="0.00",
+                        report=aggregated_report,
+                        summary={
+                            "total_issues": total_issues,
+                            "recommendations": aggregated_recommendations[:8],
+                        },
+                    )
+
             uploaded_file = request.files.get("code_file")
             if uploaded_file and uploaded_file.filename:
                 filename = uploaded_file.filename
                 upload_path = os.path.join(Config.UPLOAD_FOLDER, filename)
                 uploaded_file.save(upload_path)
-
                 with open(upload_path, "r", encoding="utf-8") as handle:
                     source_code = handle.read()
-
-                review_service = CodeReviewService()
                 result = review_service.process_file_analysis(filename, source_code)
-
                 if "error" in result:
                     return render_template(
                         "dashboard.html",
@@ -44,16 +112,64 @@ def create_app():
                         },
                         confidence="0.00",
                         report=[],
+                        summary={"total_issues": 0, "recommendations": []},
                     )
-
                 return render_template(
                     "dashboard.html",
                     filename=filename,
                     scores=result.get("scores", {}),
                     confidence=result.get("avg_confidence", "0.00"),
                     report=result.get("report", []),
+                    summary=result.get(
+                        "summary", {"total_issues": 0, "recommendations": []}
+                    ),
+                )
+
+            code_text = request.form.get("code_text", "")
+            if code_text.strip():
+                result = review_service.process_file_analysis(filename, code_text)
+                return render_template(
+                    "dashboard.html",
+                    filename=filename,
+                    scores=result.get("scores", {}),
+                    confidence=result.get("avg_confidence", "0.00"),
+                    report=result.get("report", []),
+                    summary=result.get(
+                        "summary", {"total_issues": 0, "recommendations": []}
+                    ),
                 )
         return redirect(url_for("index"))
+
+    @app.route("/export/<path:filename>/<export_type>")
+    def export_report(filename, export_type):
+        if export_type not in {"html", "pdf"}:
+            return redirect(url_for("index"))
+
+        base_path = os.path.join(Config.UPLOAD_FOLDER, filename)
+        if not os.path.exists(base_path):
+            return redirect(url_for("index"))
+
+        with open(base_path, "r", encoding="utf-8") as handle:
+            source_code = handle.read()
+        result = CodeReviewService().process_file_analysis(filename, source_code)
+        payload = json.dumps(result, ensure_ascii=False, indent=2)
+
+        if export_type == "html":
+            html_content = f"<html><body><h1>Code Review Report</h1><pre>{payload}</pre></body></html>"
+            return Response(
+                html_content,
+                mimetype="text/html",
+                headers={
+                    "Content-Disposition": f"attachment; filename={filename}.html"
+                },
+            )
+
+        pdf_content = f"%PDF-1.4\n1 0 obj<< /Type /Catalog /Pages 2 0 R >>endobj\n2 0 obj<< /Type /Pages /Kids [3 0 R] /Count 1 >>endobj\n3 0 obj<< /Type /Page /Parent 2 0 R /MediaBox [0 0 300 144] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>endobj\n4 0 obj<< /Length 44 >>stream\nBT /F1 18 Tf 20 100 Td ({filename}) Tj endstream\nendobj\n5 0 obj<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>endobj\nxref\n0 6\n0000000000 65535 f \n0000000010 00000 n \n0000000062 00000 n \n0000000119 00000 n \n0000000205 00000 n \n0000000301 00000 n \ntrailer<< /Size 6 /Root 1 0 R >>\nstartxref\n0\n%%EOF"
+        return Response(
+            pdf_content,
+            mimetype="application/pdf",
+            headers={"Content-Disposition": f"attachment; filename={filename}.pdf"},
+        )
 
     return app
 

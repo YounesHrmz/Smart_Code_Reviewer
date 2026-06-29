@@ -12,11 +12,11 @@ class UserManager:
 
     def load_users(self):
         if os.path.exists(self.db_path):
-            with open(self.db_path, "r") as f:
+            with open(self.db_path, 'r') as f:
                 self.users = json.load(f)
 
     def save_users(self):
-        with open(self.db_path, "w") as f:
+        with open(self.db_path, 'w') as f:
             json.dump(self.users, f)
 
     def add_user(self, username, password, role):
@@ -31,7 +31,7 @@ class UserManager:
 
 
 def process_file(path):
-    with open(path, "r") as f:
+    with open(path, 'r') as f:
         data = f.read()
     return data.upper()
 

@@ -1,17 +1,34 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="row justify-content-center my-5">
-    <div class="col-lg-8 text-center">
-        <h1 class="display-6 fw-bold text-dark mb-2">تحليل ومراجعة الشيفرات البرمجية محلياً وبذكاء ذاتي</h1>
-        <p class="lead text-muted mb-4">ارفع ملف بايثون ليقوم النظام بالفحص الشامل للهيكل الداخلي مع دعم حلقة التعلم الآلي المستمر.</p>
+    <div class="col-lg-9 text-center">
+        <div class="hero-ring p-4 rounded-4 mb-4 fade-in">
+            <h1 class="display-6 fw-bold mb-2">تحليل ومراجعة الشيفرات البرمجية محلياً وبذكاء ذاتي</h1>
+            <p class="lead mb-4" style="opacity: 0.8;">منصة إنتاجية حديثة لفحص الثغرات، جودة الكود، والتعقيد مع واجهة أنيقة ومريحة للعين.</p>
+            <div class="d-flex justify-content-center flex-wrap gap-2 mb-3">
+                <span class="chip bg-primary text-white">تحليل أمني</span>
+                <span class="chip bg-success text-white">تنظيف الكود</span>
+                <span class="chip bg-warning text-dark">قياس التعقيد</span>
+                <span class="chip bg-info text-white">تصدير النتائج</span>
+            </div>
+        </div>
 
-        <div class="card p-4 p-md-5 bg-white shadow-sm">
+        <div class="glass-card p-4 p-md-5 fade-in">
             <form action="/review" method="POST" enctype="multipart/form-data">
-                <div class="mb-4">
-                    <label for="code_file" class="form-label fw-bold text-secondary fs-5">اختر ملف البايثون المستهدف (.py)</label>
-                    <input class="form-control form-control-lg border-2" type="file" id="code_file" name="code_file" accept=".py" required>
+                <div class="mb-4 text-start">
+                    <label for="code_files" class="form-label fw-bold fs-5">اختر ملفات بايثون متعددة (.py)</label>
+                    <input class="form-control form-control-lg border-2" type="file" id="code_files" name="code_files" accept=".py" multiple>
                 </div>
-                <button type="submit" class="btn btn-dark btn-lg px-5 shadow-sm fw-bold">ابدأ التحليل</button>
+                <div class="mb-4 text-start">
+                    <label for="code_file" class="form-label fw-bold fs-5">اختر ملف بايثون واحد (.py)</label>
+                    <input class="form-control form-control-lg border-2" type="file" id="code_file" name="code_file" accept=".py">
+                </div>
+                <div class="mb-4 text-start">
+                    <label for="code_text" class="form-label fw-bold fs-5">أو ألصق الكود مباشرة</label>
+                    <textarea class="form-control" id="code_text" name="code_text" rows="10" placeholder="أدخل كود Python هنا للتحليل الفوري..."></textarea>
+                    <input type="hidden" name="analysis_mode" value="text">
+                </div>
+                <button type="submit" class="btn btn-dark btn-lg px-5 shadow-sm fw-bold btn-immersive">ابدأ التحليل</button>
             </form>
         </div>
     </div>
