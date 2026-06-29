@@ -1,19 +1,68 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="row justify-content-center my-5">
-    <div class="col_md_8 text-center">
-        <h1 class="display-5 mb-3 fw-bold text-secondary">حلل كودك برمجياً وبذكاء محلي</h1>
-        <p class="lead text-muted mb-5">ارفع ملف كود بايثون (.py) الخاص بك ليقوم النظام بفحصه أمنياً وبنائياً مع ميزة التطوير التلقائي لقاعدة البيانات.</p>
-        
-        <div class="card p-5 bg-white rounded-3 shadow">
-            <form action="/review" method="POST" enctype="multipart/form-data">
-                <div class="mb-4">
-                    <label for="code_file" class="form-label fw-bold">اختر ملف بايثون للفحص</label>
-                    <input class="form-control form-control-lg" type="file" id="code_file" name="code_file" accept=".py" required>
-                </div>
-                <button type="submit" class="btn btn-primary btn-lg px-5">ابدأ التحليل الذكي الآن</button>
-            </form>
+<div class="d-flex justify-content-between align-items-center mb-4" dir="rtl">
+    <h2>تقرير فحص الملف: <span class="text-primary">{{ filename }}</span></h2>
+    <a href="/" class="btn btn-outline-secondary">فحص ملف آخر</a>
+</div>
+
+<div class="row mb-4 text-center" dir="rtl">
+    <div class="col-md-3 mb-2">
+        <div class="card p-3 bg-danger text-white">
+            <h5>مؤشر الأمان</h5>
+            <h2 class="fw-bold">{{ scores.security }}%</h2>
         </div>
+    </div>
+    <div class="col-md-3 mb-2">
+        <div class="card p-3 bg-primary text-white">
+            <h5>نظافة الكود</h5>
+            <h2 class="fw-bold">{{ scores.clean_code }}%</h2>
+        </div>
+    </div>
+    <div class="col-md-3 mb-2">
+        <div class="card p-3 bg-warning text-dark">
+            <h5>جودة البنية</h5>
+            <h2 class="fw-bold">{{ scores.quality }}%</h2>
+        </div>
+    </div>
+    <div class="col-md-3 mb-2">
+        <div class="card p-3 bg-success text-white">
+            <h5>العينات المضافة ذاتياً</h5>
+            <h2 class="fw-bold">+{{ scores.auto_added }}</h2>
+        </div>
+    </div>
+</div>
+
+<div class="card p-4 bg-white mb-4" dir="rtl">
+    <h4 class="mb-3 text-secondary">📊 التقرير التحليلي المفصل للنموذج المحلي</h4>
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead>
+                <tr>
+                    <th>السطر</th>
+                    <th>العينة البرمجية المفحوصة</th>
+                    <th>فئة التحليل</th>
+                    <th>التقييم المستنتج</th>
+                    <th>درجة ثقة المودل</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in report %}
+                <tr>
+                    <td><code>{{ item.line }}</code></td>
+                    <td><pre class="mb-0 bg-light p-2 rounded text-start"><code>{{ item.code }}</code></pre></td>
+                    <td><span class="badge bg-secondary">{{ item.category }}</span></td>
+                    <td>
+                        <span class="badge {% if item.label == 'good' %}bg-success{% else %}bg-danger{% endif %}">
+                            {{ item.label }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="fw-bold text-dark">{{ item.confidence }}</span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}
