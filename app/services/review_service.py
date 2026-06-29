@@ -20,7 +20,12 @@ class CodeReviewService:
         parser = ASTParser(source_code)
         if not parser.is_valid():
             return {
-                "error": "خطأ في بناء الجملة: الملف المرفوع ليس نصًّا بايثون صالحًا."
+                "error": "خطأ في بناء الجملة: الملف المرفوع ليس نصًّا بايثون صالحًا.",
+                "summary": {
+                    "total_issues": 0,
+                    "recommendations": [],
+                },
+                "report": [],
             }
 
         snippets = parser.get_isolated_snippets()
@@ -37,6 +42,8 @@ class CodeReviewService:
         clean_violations = 0
         quality_violations = 0
         confidences = []
+        recommendations = []
+        seen_descriptions = set()
 
         for item in snippets:
             code = item["code"]
@@ -49,7 +56,6 @@ class CodeReviewService:
             combined_issues = (
                 sec_res["issues"] + clean_res["issues"] + qual_res["issues"]
             )
-
             fallback_cat = "clean_code"
             if sec_res["has_issue"]:
                 fallback_cat = "security"
@@ -57,8 +63,6 @@ class CodeReviewService:
                 fallback_cat = "quality"
 
             fallback_label = "bad" if combined_issues else "good"
-
-            # استدعاء حلقة التعلم الذاتي وحساب الثقة الاحتمالية
             final_cat, final_label, confidence = self.learning_loop.evaluate_and_learn(
                 code, fallback_cat, fallback_label
             )
@@ -73,15 +77,19 @@ class CodeReviewService:
                 elif fallback_cat == "quality":
                     quality_violations += 1
                 severity = "critical" if fallback_cat == "security" else "warning"
-                description = (
-                    combined_issues[0]
+                issue_text = (
+                    " | ".join(combined_issues)
                     if combined_issues
                     else "تم اكتشاف بنية غير طبيعية بواسطة الذكاء المحلي، ويحتاج هذا الجزء إلى مراجعة هندسية فورية."
                 )
+                description = f"السطر {line}: {issue_text}"
+                if description not in seen_descriptions:
+                    recommendations.append(description)
+                    seen_descriptions.add(description)
             else:
                 final_label = "مقبول"
                 severity = "safe"
-                description = "هذا الجزء من الكود يتوافق مع معايير البنية المحلية ولا يحتاج إلى تحسينات فورية."
+                description = f"السطر {line}: هذا الجزء من الكود يتوافق مع معايير البنية المحلية ولا يحتاج إلى تحسينات فورية."
 
             category_label = (
                 "أمن"
@@ -125,4 +133,10 @@ class CodeReviewService:
             },
             "report": detailed_report,
             "avg_confidence": f"{avg_conf:.2%}",
+            "summary": {
+                "total_issues": len(
+                    [item for item in detailed_report if item["label"] == "مشكلة"]
+                ),
+                "recommendations": recommendations[:8],
+            },
         }

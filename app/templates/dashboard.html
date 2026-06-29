@@ -1,25 +1,41 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4" dir="rtl">
-    <h2 class="fw-bold text-secondary">لوحة التقييم والتحليل: <span class="text-dark">{{ filename }}</span></h2>
-    <a href="/" class="btn btn-dark fw-bold">تحليل ملف جديد</a>
+    <div>
+        <h2 class="fw-bold mb-1">لوحة التقييم والتحليل: <span class="text-primary">{{ filename }}</span></h2>
+        <p class="text-muted mb-0">تقارير مهنية، رؤية واضحة، ومخرجات جاهزة للإنتاج.</p>
+    </div>
+    <a href="/" class="btn btn-dark fw-bold btn-immersive">تحليل ملف جديد</a>
 </div>
 
 <div class="row g-3 mb-4 text-center" dir="rtl">
-    <div class="col-md-3"><div class="card p-3 bg-dark text-white shadow"><h6>المعدل العام للنظام</h6><h1 class="fw-bold text-warning">{{ scores.overall }}%</h1></div></div>
-    <div class="col-md-3"><div class="card p-3 bg-white border-top border-danger border-4 shadow-sm"><h6 class="text-muted">مؤشر الأمان (Security)</h6><h2 class="fw-bold text-danger">{{ scores.security }}%</h2></div></div>
-    <div class="col-md-3"><div class="card p-3 bg-white border-top border-primary border-4 shadow-sm"><h6 class="text-muted">نظافة الكود (Clean Code)</h6><h2 class="fw-bold text-primary">{{ scores.clean_code }}%</h2></div></div>
-    <div class="col-md-3"><div class="card p-3 bg-white border-top border-warning border-4 shadow-sm"><h6 class="text-muted">الجودة والتعقيد (Quality)</h6><h2 class="fw-bold text-warning">{{ scores.quality }}%</h2></div></div>
+    <div class="col-md-3"><div class="glass-card p-3 fade-in"><h6>المعدل العام للنظام</h6><h1 class="fw-bold text-warning">{{ scores.overall }}%</h1></div></div>
+    <div class="col-md-3"><div class="glass-card p-3 fade-in"><h6 class="text-muted">مؤشر الأمان</h6><h2 class="fw-bold text-danger">{{ scores.security }}%</h2></div></div>
+    <div class="col-md-3"><div class="glass-card p-3 fade-in"><h6 class="text-muted">نظافة الكود</h6><h2 class="fw-bold text-primary">{{ scores.clean_code }}%</h2></div></div>
+    <div class="col-md-3"><div class="glass-card p-3 fade-in"><h6 class="text-muted">الجودة والتعقيد</h6><h2 class="fw-bold text-warning">{{ scores.quality }}%</h2></div></div>
 </div>
 
 <div class="row g-3 mb-4">
-    <div class="col-md-12"><div class="card p-4 bg-white shadow-sm h-100"><h5 class="fw-bold text-secondary mb-3">📈 مؤشرات الكفاءة والوضوح</h5><p class="text-muted small mb-3">متوسط ثقة الاستدلال: <strong>{{ confidence }}</strong></p><div class="d-flex justify-content-center align-items-center" style="max-height: 260px;"><canvas id="pieChart"></canvas></div></div></div>
+    <div class="col-md-8"><div class="glass-card p-4 h-100 fade-in"><h5 class="fw-bold mb-3">📈 مؤشرات الكفاءة والوضوح</h5><p class="text-muted small mb-3">متوسط ثقة الاستدلال: <strong>{{ confidence }}</strong></p><div class="d-flex justify-content-center align-items-center" style="max-height: 260px;"><canvas id="pieChart"></canvas></div></div></div>
+    <div class="col-md-4"><div class="glass-card p-4 h-100 fade-in"><h5 class="fw-bold mb-3">🧭 ملخص سريع</h5><p class="mb-2"><strong>إجمالي المشكلات:</strong> {{ summary.total_issues }}</p><p class="mb-2"><strong>أهم التوصيات:</strong></p><ul class="small text-muted ps-3 soft-list">
+        {% for rec in summary.recommendations %}
+        <li>{{ rec }}</li>
+        {% endfor %}
+    </ul></div></div>
 </div>
 
-<div class="card p-4 bg-white shadow-sm mb-4 text-end" dir="rtl">
-    <h4 class="mb-3 fw-bold text-secondary">🗂️ التقرير البرمي الميداني والحلول المقترحة</h4>
+<div class="glass-card p-4 mb-4 text-end fade-in" dir="rtl">
+    <h4 class="mb-3 fw-bold">🗂️ التقرير البرمي الميداني والحلول المقترحة</h4>
     <div class="alert alert-info border-0 mb-3" role="alert">
         <strong>تحسينات النظام:</strong> تم تعزيز تحليل الثغرات، تحسين عرض النتائج، وتسهيل قراءة التوصيات الهندسية في كل سطر.
+    </div>
+    {% if summary.total_issues > 0 %}
+    <div class="alert alert-danger border-0 mb-3" role="alert">
+        <strong>تنبيه أمني:</strong> تم اكتشاف ثغرات أو مشكلات تحتاج إلى مراجعة فورية قبل الإطلاق أو النشر.
+    </div>
+    {% endif %}
+    <div class="mb-3">
+        <a href="/export/{{ filename }}" class="btn btn-outline-dark btn-immersive">تصدير التقرير بصيغة JSON</a>
     </div>
     <div class="table-responsive">
         <table class="table table-bordered align-middle" style="color: #212529 !important;">
