@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4" dir="rtl">
+    <h2 class="fw-bold text-secondary">لوحة التقييم والتحليل: <span class="text-dark">{{ filename }}</span></h2>
+    <a href="/" class="btn btn-dark fw-bold">تحليل ملف جديد</a>
+</div>
+
+<div class="row g-3 mb-4 text-center" dir="rtl">
+    <div class="col-md-3"><div class="card p-3 bg-dark text-white shadow"><h6>المعدل العام للنظام</h6><h1 class="fw-bold text-warning">{{ scores.overall }}%</h1></div></div>
+    <div class="col-md-3"><div class="card p-3 bg-white border-top border-danger border-4 shadow-sm"><h6 class="text-muted">مؤشر الأمان (Security)</h6><h2 class="fw-bold text-danger">{{ scores.security }}%</h2></div></div>
+    <div class="col-md-3"><div class="card p-3 bg-white border-top border-primary border-4 shadow-sm"><h6 class="text-muted">نظافة الكود (Clean Code)</h6><h2 class="fw-bold text-primary">{{ scores.clean_code }}%</h2></div></div>
+    <div class="col-md-3"><div class="card p-3 bg-white border-top border-warning border-4 shadow-sm"><h6 class="text-muted">الجودة والتعقيد (Quality)</h6><h2 class="fw-bold text-warning">{{ scores.quality }}%</h2></div></div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-12"><div class="card p-4 bg-white shadow-sm h-100"><h5 class="fw-bold text-secondary mb-3">📈 مؤشرات الكفاءة والوضوح</h5><p class="text-muted small mb-3">متوسط ثقة الاستدلال: <strong>{{ confidence }}</strong></p><div class="d-flex justify-content-center align-items-center" style="max-height: 260px;"><canvas id="pieChart"></canvas></div></div></div>
+</div>
+
+<div class="card p-4 bg-white shadow-sm mb-4 text-end" dir="rtl">
+    <h4 class="mb-3 fw-bold text-secondary">🗂️ التقرير البرمي الميداني والحلول المقترحة</h4>
+    <div class="alert alert-info border-0 mb-3" role="alert">
+        <strong>تحسينات النظام:</strong> تم تعزيز تحليل الثغرات، تحسين عرض النتائج، وتسهيل قراءة التوصيات الهندسية في كل سطر.
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle" style="color: #212529 !important;">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th style="width: 8%; color: #ffffff !important;">السطر</th>
+                    <th style="width: 42%; color: #ffffff !important;">العينة البرمجية المفحوصة</th>
+                    <th style="width: 15%; color: #ffffff !important;">فئة التحليل</th>
+                    <th style="width: 10%; color: #ffffff !important;">الحالة</th>
+                    <th style="width: 25%; color: #ffffff !important;">تقرير المشكلة والتوصية الهندسيّة</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if report %}
+                    {% for item in report %}
+                    <tr style="background-color: {% if item.severity == 'critical' %}#fff5f5{% elif item.severity == 'warning' %}#fffdf0{% else %}#f5fff8{% endif %} !important; color: #212529 !important; border-right: 6px solid {% if item.severity == 'critical' %}#dc3545{% elif item.severity == 'warning' %}#ffc107{% else %}#198754{% endif %} !important;">
+                        <td class="fw-bold text-center" style="color: #212529 !important;"><code>{{ item.line }}</code></td>
+                        <td class="text-start">
+                            <pre class="mb-0 p-2 bg-white rounded border border-secondary text-dark" style="font-size: 13px; color: #212529 !important;"><code style="color: #212529 !important;">{{ item.code }}</code></pre>
+                        </td>
+                        <td class="text-center"><span class="badge bg-secondary p-2">{{ item.category }}</span></td>
+                        <td class="text-center"><span class="badge {% if item.label == 'good' %}bg-success{% else %}bg-danger{% endif %} p-2">{{ item.label }}</span></td>
+                        <td class="small fw-bold text-start p-3" style="color: #212529 !important; line-height: 1.5;">{{ item.description }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr><td colspan="5" class="text-center text-muted py-4">لا توجد بيانات حالية في هذا التقرير.</td></tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    const ctxPie = document.getElementById('pieChart').getContext('2d');
+    new Chart(ctxPie, {
+        type: 'pie',
+        data: {
+            labels: ['الدرجة المحققة', 'الفجوة المطلوبة'],
+            datasets: [{
+                data: [{{ scores.overall }}, 100 - {{ scores.overall }}],
+                backgroundColor: ['#198754', '#e0e0e0']
+            }]
+        },
+        options: {
+            plugins: { legend: { position: 'bottom' } }
+        }
+    });
+</script>
+{% endblock %}

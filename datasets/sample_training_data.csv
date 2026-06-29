@@ -1,0 +1,4258 @@
+code_snippet,predicted_category,predicted_label,confidence_score
+"def add(a, b):
+    return a + b",clean_code,good,0.96
+"def calculate_total(items):
+    total = 0
+    for item in items:
+        total += item
+    return total",clean_code,good,0.94
+"import os
+os.system('rm -rf /')",security,bad,0.97
+"import subprocess
+subprocess.call(['echo', 'hello'])",security,bad,0.95
+"def bad_name(x, y, z):
+    tmp = x + y + z
+    return tmp",clean_code,bad,0.92
+"def analyze(value):
+    if value > 0:
+        return 'positive'
+    return 'non-positive'",quality,good,0.91
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 7",clean_code,bad,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 9",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 11",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 13",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 15",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 17",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 19",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 21",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 23",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 25",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 27",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 29",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 31",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 33",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 35",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 37",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 39",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 41",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 43",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 45",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 47",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 49",clean_code,bad,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 51",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 53",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 55",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 57",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 59",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 61",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 63",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 65",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 67",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 69",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 71",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 73",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 75",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 77",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 79",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 81",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 83",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 85",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 87",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 89",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 91",clean_code,bad,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 93",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 95",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 97",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 99",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 101",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 103",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 105",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 107",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 109",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 111",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 113",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 115",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 117",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 119",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 121",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 123",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 125",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 127",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 129",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 131",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 133",clean_code,bad,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 135",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 137",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 139",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 141",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 143",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 145",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 147",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 149",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 151",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 153",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 155",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 157",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 159",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 161",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 163",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 165",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 167",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 169",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 171",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 173",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 175",clean_code,bad,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 177",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 179",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 181",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 183",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 185",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 187",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 189",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 191",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 193",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 195",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 197",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 199",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 201",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 203",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 205",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 207",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 209",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 211",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 213",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 215",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 217",clean_code,bad,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 219",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 221",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 223",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 225",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 227",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 229",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 231",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 233",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 235",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 237",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 239",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 241",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 243",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 245",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 247",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 249",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 251",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 253",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 255",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 257",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 259",clean_code,bad,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 261",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 263",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 265",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 267",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 269",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 271",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 273",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 275",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 277",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 279",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 281",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 283",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 285",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 287",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 289",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 291",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 293",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 295",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 297",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 299",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 301",clean_code,bad,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 303",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 305",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 307",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 309",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 311",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 313",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 315",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 317",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 319",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 321",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 323",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 325",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 327",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 329",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 331",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 333",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 335",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 337",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 339",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 341",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 343",clean_code,bad,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 345",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 347",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 349",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 351",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 353",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 355",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 357",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 359",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 361",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 363",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 365",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 367",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 369",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 371",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 373",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 375",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 377",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 379",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 381",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 383",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 385",clean_code,bad,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 387",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 389",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 391",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 393",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 395",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 397",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 399",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 401",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 403",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 405",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 407",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 409",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 411",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 413",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 415",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 417",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 419",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 421",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 423",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 425",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 427",clean_code,bad,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 429",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 431",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 433",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 435",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 437",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 439",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 441",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 443",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 445",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 447",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 449",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 451",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 453",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 455",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 457",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 459",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 461",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 463",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 465",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 467",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 469",clean_code,bad,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 471",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 473",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 475",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 477",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 479",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 481",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 483",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 485",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 487",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 489",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 491",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 493",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 495",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 497",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 499",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 501",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 503",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 505",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 507",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 509",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 511",clean_code,bad,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 513",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 515",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 517",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 519",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 521",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 523",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 525",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 527",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 529",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 531",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 533",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 535",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 537",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 539",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 541",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 543",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 545",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 547",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 549",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 551",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 553",clean_code,bad,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 555",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 557",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 559",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 561",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 563",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 565",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 567",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 569",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 571",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 573",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 575",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 577",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 579",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 581",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 583",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 585",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 587",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 589",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 591",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 593",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 595",clean_code,bad,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 597",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 599",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 601",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 603",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 605",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 607",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 609",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 611",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 613",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 615",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 617",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 619",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 621",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 623",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 625",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 627",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 629",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 631",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 633",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 635",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 637",clean_code,bad,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 639",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 641",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 643",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 645",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 647",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 649",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 651",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 653",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 655",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 657",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 659",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 661",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 663",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 665",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 667",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 669",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 671",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 673",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 675",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 677",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 679",clean_code,bad,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 681",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 683",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 685",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 687",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 689",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 691",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 693",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 695",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 697",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 699",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 701",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 703",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 705",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 707",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 709",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 711",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 713",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 715",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 717",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 719",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 721",clean_code,bad,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 723",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 725",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 727",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 729",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 731",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 733",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 735",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 737",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 739",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 741",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 743",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 745",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 747",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 749",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 751",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 753",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 755",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 757",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 759",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 761",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 763",clean_code,bad,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 765",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 767",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 769",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 771",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 773",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 775",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 777",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 779",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 781",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 783",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 785",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 787",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 789",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 791",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 793",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 795",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 797",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 799",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 801",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 803",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 805",clean_code,bad,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 807",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 809",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 811",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 813",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 815",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 817",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 819",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 821",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 823",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 825",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 827",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 829",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 831",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 833",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 835",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 837",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 839",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 841",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 843",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 845",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 847",clean_code,bad,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 849",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 851",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 853",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 855",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 857",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 859",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 861",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 863",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 865",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 867",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 869",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 871",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 873",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 875",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 877",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 879",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 881",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 883",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 885",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 887",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 889",clean_code,bad,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 891",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 893",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 895",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 897",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 899",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 901",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 903",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 905",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 907",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 909",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 911",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 913",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 915",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 917",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 919",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 921",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 923",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 925",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 927",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 929",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 931",clean_code,bad,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 933",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 935",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 937",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 939",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 941",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 943",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 945",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 947",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 949",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 951",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 953",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 955",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 957",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 959",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 961",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 963",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 965",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 967",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 969",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 971",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 973",clean_code,bad,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 975",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 977",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 979",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 981",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 983",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 985",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 987",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 989",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 991",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 993",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 995",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 997",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 999",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1001",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1003",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1005",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1007",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1009",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1011",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1013",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1015",clean_code,bad,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1017",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1019",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1021",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1023",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1025",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1027",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1029",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1031",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1033",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1035",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1037",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1039",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1041",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1043",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1045",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1047",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1049",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1051",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1053",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1055",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1057",clean_code,bad,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1059",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1061",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1063",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1065",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1067",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1069",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1071",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1073",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1075",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1077",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1079",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1081",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1083",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1085",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1087",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1089",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1091",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1093",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1095",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1097",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1099",clean_code,bad,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1101",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1103",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1105",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1107",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1109",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1111",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1113",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1115",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1117",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1119",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1121",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1123",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1125",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1127",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1129",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1131",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1133",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1135",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1137",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1139",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1141",clean_code,bad,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1143",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1145",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1147",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1149",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1151",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1153",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1155",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1157",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1159",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1161",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1163",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1165",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1167",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1169",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1171",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1173",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1175",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1177",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1179",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1181",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1183",clean_code,bad,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1185",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1187",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1189",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1191",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1193",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1195",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1197",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1199",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1201",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1203",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1205",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1207",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1209",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1211",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1213",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1215",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1217",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1219",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1221",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1223",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1225",clean_code,bad,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1227",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1229",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1231",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1233",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1235",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1237",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1239",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1241",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1243",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1245",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1247",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1249",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1251",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1253",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1255",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1257",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1259",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1261",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1263",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1265",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1267",clean_code,bad,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1269",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1271",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1273",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1275",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1277",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1279",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1281",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1283",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1285",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1287",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1289",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1291",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1293",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1295",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1297",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1299",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1301",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1303",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1305",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1307",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1309",clean_code,bad,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1311",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1313",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1315",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1317",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1319",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1321",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1323",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1325",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1327",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1329",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1331",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1333",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1335",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1337",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1339",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1341",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1343",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1345",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1347",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1349",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1351",clean_code,bad,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1353",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1355",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1357",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1359",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1361",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1363",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1365",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1367",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1369",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1371",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1373",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1375",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1377",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1379",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1381",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1383",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1385",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1387",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1389",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1391",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1393",clean_code,bad,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1395",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1397",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1399",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1401",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1403",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1405",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1407",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1409",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1411",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1413",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1415",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1417",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1419",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1421",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1423",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1425",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1427",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1429",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1431",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1433",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1435",clean_code,bad,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1437",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1439",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1441",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1443",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1445",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1447",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1449",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1451",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1453",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1455",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1457",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1459",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1461",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1463",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1465",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1467",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1469",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1471",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1473",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1475",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1477",clean_code,bad,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1479",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1481",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1483",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1485",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1487",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1489",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1491",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1493",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1495",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1497",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1499",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1501",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1503",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1505",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1507",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1509",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1511",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1513",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1515",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1517",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1519",clean_code,bad,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1521",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1523",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1525",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1527",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1529",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1531",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1533",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1535",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1537",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1539",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1541",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1543",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1545",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1547",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1549",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1551",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1553",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1555",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1557",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1559",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1561",clean_code,bad,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1563",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1565",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1567",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1569",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1571",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1573",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1575",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1577",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1579",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1581",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1583",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1585",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1587",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1589",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1591",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1593",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1595",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1597",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1599",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1601",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1603",clean_code,bad,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1605",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1607",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1609",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1611",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1613",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1615",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1617",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1619",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1621",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1623",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1625",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1627",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1629",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1631",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1633",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1635",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1637",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1639",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1641",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1643",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1645",clean_code,bad,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1647",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1649",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1651",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1653",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1655",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1657",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1659",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1661",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1663",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1665",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1667",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1669",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1671",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1673",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1675",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1677",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1679",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1681",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1683",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1685",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1687",clean_code,bad,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1689",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1691",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1693",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1695",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1697",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1699",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1701",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1703",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1705",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1707",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1709",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1711",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1713",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1715",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1717",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1719",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1721",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1723",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1725",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1727",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1729",clean_code,bad,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1731",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1733",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1735",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1737",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1739",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1741",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1743",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1745",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1747",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1749",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1751",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1753",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1755",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1757",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1759",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1761",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1763",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1765",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1767",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1769",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1771",clean_code,bad,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1773",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1775",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1777",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1779",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1781",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1783",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1785",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1787",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1789",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1791",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1793",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1795",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1797",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1799",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1801",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1803",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1805",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1807",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1809",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1811",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1813",clean_code,bad,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1815",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1817",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1819",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1821",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1823",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1825",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1827",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1829",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1831",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1833",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1835",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1837",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1839",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1841",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1843",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1845",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1847",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1849",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1851",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1853",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1855",clean_code,bad,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1857",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1859",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1861",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1863",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1865",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1867",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1869",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1871",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1873",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1875",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1877",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1879",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1881",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1883",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1885",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1887",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1889",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1891",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1893",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1895",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1897",clean_code,bad,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1899",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1901",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1903",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1905",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1907",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1909",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1911",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1913",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1915",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1917",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1919",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1921",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1923",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1925",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1927",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1929",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1931",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1933",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1935",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1937",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1939",clean_code,bad,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1941",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1943",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1945",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1947",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1949",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1951",clean_code,good,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1953",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1955",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1957",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1959",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1961",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1963",clean_code,good,0.88
+"def contains_even(nums):
+    return any(num % 2 == 0 for num in nums)
+# sample row 1965",quality,good,0.89
+"import os
+os.remove('file.txt')
+# sample row 1967",security,bad,0.9
+"def build_summary(items):
+    summary = []
+    for item in items:
+        summary.append(str(item))
+    return summary
+# sample row 1969",clean_code,good,0.91
+"def parse_value(value):
+    if value is None:
+        return 0
+    return int(value)
+# sample row 1971",quality,good,0.92
+"import requests
+requests.get(url, verify=False)
+# sample row 1973",security,bad,0.93
+"def safe_divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+# sample row 1975",clean_code,good,0.94
+"def check_status(flag):
+    if flag:
+        return 'enabled'
+    return 'disabled'
+# sample row 1977",quality,bad,0.95
+"import subprocess
+subprocess.call(['whoami'])
+# sample row 1979",security,bad,0.96
+"class ConfigLoader:
+    def __init__(self):
+        self.value = 1
+
+    def read(self):
+        return self.value
+# sample row 1981",clean_code,bad,0.97
+"def loop_example(items):
+    count = 0
+    for item in items:
+        count += 1
+    return count
+# sample row 1983",quality,good,0.98
+"import pickle
+pickle.loads(payload)
+# sample row 1985",security,bad,0.99
+"def normalize_name(name):
+    return name.strip().lower()
+# sample row 1987",clean_code,good,0.85
+"def get_average(nums):
+    if not nums:
+        return 0
+    return sum(nums) / len(nums)
+# sample row 1989",quality,good,0.86
+"import yaml
+obj = yaml.load(content)
+# sample row 1991",security,bad,0.87
+"def load_settings(path):
+    with open(path, 'r') as handle:
+        return handle.read()
+# sample row 1993",clean_code,good,0.88
