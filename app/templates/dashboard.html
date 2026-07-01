@@ -9,10 +9,10 @@
 </div>
 
 <div class="row g-3 mb-4 text-center" dir="rtl">
-    <div class="col-md-3"><div class="glass-card p-3 fade-in"><h6>المعدل العام للنظام</h6><h1 class="fw-bold text-warning">{{ scores.overall }}%</h1></div></div>
-    <div class="col-md-3"><div class="glass-card p-3 fade-in"><h6 class="text-muted">مؤشر الأمان</h6><h2 class="fw-bold text-danger">{{ scores.security }}%</h2></div></div>
-    <div class="col-md-3"><div class="glass-card p-3 fade-in"><h6 class="text-muted">نظافة الكود</h6><h2 class="fw-bold text-primary">{{ scores.clean_code }}%</h2></div></div>
-    <div class="col-md-3"><div class="glass-card p-3 fade-in"><h6 class="text-muted">الجودة والتعقيد</h6><h2 class="fw-bold text-warning">{{ scores.quality }}%</h2></div></div>
+    <div class="col-md-3"><div class="glass-card metric-card p-3 fade-in"><h6 class="fw-semibold">المعدل العام للنظام</h6><h1 class="fw-bold text-warning">{{ scores.overall }}%</h1></div></div>
+    <div class="col-md-3"><div class="glass-card metric-card p-3 fade-in"><h6 class="text-muted">مؤشر الأمان</h6><h2 class="fw-bold text-danger">{{ scores.security }}%</h2></div></div>
+    <div class="col-md-3"><div class="glass-card metric-card p-3 fade-in"><h6 class="text-muted">نظافة الكود</h6><h2 class="fw-bold text-primary">{{ scores.clean_code }}%</h2></div></div>
+    <div class="col-md-3"><div class="glass-card metric-card p-3 fade-in"><h6 class="text-muted">الجودة والتعقيد</h6><h2 class="fw-bold text-warning">{{ scores.quality }}%</h2></div></div>
 </div>
 
 <div class="row g-3 mb-4">
@@ -38,8 +38,8 @@
         <a href="/export/{{ filename }}" class="btn btn-outline-dark btn-immersive">تصدير التقرير بصيغة JSON</a>
     </div>
     <div class="table-responsive">
-        <table class="table table-bordered align-middle" style="color: #212529 !important;">
-            <thead class="table-dark text-center">
+        <table class="table table-modern table-bordered align-middle">
+            <thead class="text-center">
                 <tr>
                     <th style="width: 8%; color: #ffffff !important;">السطر</th>
                     <th style="width: 42%; color: #ffffff !important;">العينة البرمجية المفحوصة</th>
@@ -51,7 +51,7 @@
             <tbody>
                 {% if report %}
                     {% for item in report %}
-                    <tr style="background-color: {% if item.severity == 'critical' %}#fff5f5{% elif item.severity == 'warning' %}#fffdf0{% else %}#f5fff8{% endif %} !important; color: #212529 !important; border-right: 6px solid {% if item.severity == 'critical' %}#dc3545{% elif item.severity == 'warning' %}#ffc107{% else %}#198754{% endif %} !important;">
+                    <tr class="{% if item.severity == 'critical' %}severity-critical{% elif item.severity == 'warning' %}severity-warning{% else %}severity-safe{% endif %}">
                         <td class="fw-bold text-center" style="color: #212529 !important;"><code>{{ item.line }}</code></td>
                         <td class="text-start">
                             <pre class="mb-0 p-2 bg-white rounded border border-secondary text-dark" style="font-size: 13px; color: #212529 !important;"><code style="color: #212529 !important;">{{ item.code }}</code></pre>
