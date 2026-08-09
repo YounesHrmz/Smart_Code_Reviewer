@@ -35,29 +35,37 @@
     </div>
     {% endif %}
     <div class="mb-3">
-        <a href="/export/{{ filename }}" class="btn btn-outline-dark btn-immersive">تصدير التقرير بصيغة JSON</a>
+        <a href="/export/{{ filename }}/json" class="btn btn-outline-dark btn-immersive">تنزيل التقرير بصيغة JSON</a>
+        <a href="/export/{{ filename }}/html" class="btn btn-outline-secondary btn-immersive ms-2">تنزيل HTML</a>
+        <a href="/export/{{ filename }}/pdf" class="btn btn-outline-secondary btn-immersive ms-2">تنزيل PDF</a>
+    </div>
+    <div class="mb-4 d-flex gap-2 flex-wrap justify-content-end">
+        <button class="btn btn-sm btn-primary btn-immersive" onclick="filterReport('all')">عرض الكل</button>
+        <button class="btn btn-sm btn-secondary btn-immersive" onclick="filterReport('issues')">عرض المشاكل فقط</button>
+        <button class="btn btn-sm btn-warning btn-immersive" onclick="filterReport('warning')">تحذيرات</button>
+        <button class="btn btn-sm btn-danger btn-immersive" onclick="filterReport('critical')">حرج</button>
     </div>
     <div class="table-responsive">
-        <table class="table table-modern table-bordered align-middle">
+        <table id="reviewReportTable" class="table table-modern table-bordered align-middle">
             <thead class="text-center">
                 <tr>
-                    <th style="width: 8%; color: #ffffff !important;">السطر</th>
-                    <th style="width: 42%; color: #ffffff !important;">العينة البرمجية المفحوصة</th>
-                    <th style="width: 15%; color: #ffffff !important;">فئة التحليل</th>
+                    <th style="width: 6%; color: #ffffff !important;">السطر</th>
+                    <th style="width: 40%; color: #ffffff !important;">العينة البرمجية المفحوصة</th>
+                    <th style="width: 14%; color: #ffffff !important;">فئة التحليل</th>
                     <th style="width: 10%; color: #ffffff !important;">الحالة</th>
-                    <th style="width: 25%; color: #ffffff !important;">تقرير المشكلة والتوصية الهندسيّة</th>
+                    <th style="width: 30%; color: #ffffff !important;">تقرير المشكلة والتوصية الهندسيّة</th>
                 </tr>
             </thead>
             <tbody>
                 {% if report %}
                     {% for item in report %}
-                    <tr class="{% if item.severity == 'critical' %}severity-critical{% elif item.severity == 'warning' %}severity-warning{% else %}severity-safe{% endif %}">
+                    <tr class="report-row {% if item.severity == 'critical' %}severity-critical{% elif item.severity == 'warning' %}severity-warning{% else %}severity-safe{% endif %}" data-severity="{{ item.severity }}">
                         <td class="fw-bold text-center" style="color: #212529 !important;"><code>{{ item.line }}</code></td>
                         <td class="text-start">
                             <pre class="mb-0 p-2 bg-white rounded border border-secondary text-dark" style="font-size: 13px; color: #212529 !important;"><code style="color: #212529 !important;">{{ item.code }}</code></pre>
                         </td>
                         <td class="text-center"><span class="badge bg-secondary p-2">{{ item.category }}</span></td>
-                        <td class="text-center"><span class="badge {% if item.label == 'good' %}bg-success{% else %}bg-danger{% endif %} p-2">{{ item.label }}</span></td>
+                        <td class="text-center"><span class="badge {% if item.label == 'مقبول' %}bg-success{% elif item.severity == 'warning' %}bg-warning{% else %}bg-danger{% endif %} p-2">{{ item.label }}</span></td>
                         <td class="small fw-bold text-start p-3" style="color: #212529 !important; line-height: 1.5;">{{ item.description }}</td>
                     </tr>
                     {% endfor %}
@@ -67,6 +75,32 @@
             </tbody>
         </table>
     </div>
+    <script>
+        function filterReport(level) {
+            const rows = document.querySelectorAll('#reviewReportTable .report-row');
+            rows.forEach(row => {
+                const severity = row.dataset.severity;
+                if (level === 'all') {
+                    row.style.display = '';
+                    return;
+                }
+                if (level === 'issues') {
+                    row.style.display = severity === 'safe' ? 'none' : '';
+                    return;
+                }
+                if (level === 'safe' && severity === 'safe') {
+                    row.style.display = '';
+                } else if (level === 'warning' && severity === 'warning') {
+                    row.style.display = '';
+                } else if (level === 'critical' && severity === 'critical') {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+        document.addEventListener('DOMContentLoaded', () => filterReport('issues'));
+    </script>
 </div>
 
 <script>
