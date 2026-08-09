@@ -1,0 +1,30 @@
+﻿body {
+    background-color: #f3f6ff;
+    color: #14213d;
+}
+
+.navbar-shell {
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.11);
+}
+
+.glass-card {
+    border-radius: 18px;
+}
+
+.btn-immersive {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-immersive:hover {
+    transform: translateY(-1px);
+}
+
+.report-row {
+    transition: background-color 0.2s ease;
+}
+
+@media (max-width: 768px) {
+    .glass-card {
+        border-radius: 14px;
+    }
+}

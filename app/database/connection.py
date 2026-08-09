@@ -49,7 +49,7 @@ def init_db():
                 for record in reader:
                     confidence_value = record.get("confidence_score") or "0.0"
                     cursor.execute(
-                        "INSERT INTO training_samples (code_snippet, predicted_category, predicted_label, confidence_score) VALUES (?, ?, ?, ?)",
+                        "INSERT OR IGNORE INTO training_samples (code_snippet, predicted_category, predicted_label, confidence_score) VALUES (?, ?, ?, ?)",
                         (
                             record["code_snippet"],
                             record["predicted_category"],

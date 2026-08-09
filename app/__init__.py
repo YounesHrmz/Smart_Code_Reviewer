@@ -1,9 +1,11 @@
+import html
 import os
 import json
 from flask import Flask, redirect, render_template, request, url_for, Response
 
 from app.config import Config
 from app.database.connection import init_db
+from app.export.pdf_exporter import PDFExporter
 from app.services.review_service import CodeReviewService
 
 
@@ -142,7 +144,7 @@ def create_app():
 
     @app.route("/export/<path:filename>/<export_type>")
     def export_report(filename, export_type):
-        if export_type not in {"html", "pdf"}:
+        if export_type not in {"html", "pdf", "json"}:
             return redirect(url_for("index"))
 
         base_path = os.path.join(Config.UPLOAD_FOLDER, filename)
@@ -152,10 +154,20 @@ def create_app():
         with open(base_path, "r", encoding="utf-8") as handle:
             source_code = handle.read()
         result = CodeReviewService().process_file_analysis(filename, source_code)
-        payload = json.dumps(result, ensure_ascii=False, indent=2)
 
+        if export_type == "json":
+            payload = json.dumps(result, ensure_ascii=False, indent=2)
+            return Response(
+                payload,
+                mimetype="application/json",
+                headers={
+                    "Content-Disposition": f"attachment; filename={filename}.json"
+                },
+            )
+
+        payload = json.dumps(result, ensure_ascii=False, indent=2)
         if export_type == "html":
-            html_content = f"<html><body><h1>Code Review Report</h1><pre>{payload}</pre></body></html>"
+            html_content = f'<html><head><meta charset="utf-8"></head><body><h1>Code Review Report</h1><pre>{html.escape(payload)}</pre></body></html>'
             return Response(
                 html_content,
                 mimetype="text/html",
@@ -164,9 +176,9 @@ def create_app():
                 },
             )
 
-        pdf_content = f"%PDF-1.4\n1 0 obj<< /Type /Catalog /Pages 2 0 R >>endobj\n2 0 obj<< /Type /Pages /Kids [3 0 R] /Count 1 >>endobj\n3 0 obj<< /Type /Page /Parent 2 0 R /MediaBox [0 0 300 144] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>endobj\n4 0 obj<< /Length 44 >>stream\nBT /F1 18 Tf 20 100 Td ({filename}) Tj endstream\nendobj\n5 0 obj<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>endobj\nxref\n0 6\n0000000000 65535 f \n0000000010 00000 n \n0000000062 00000 n \n0000000119 00000 n \n0000000205 00000 n \n0000000301 00000 n \ntrailer<< /Size 6 /Root 1 0 R >>\nstartxref\n0\n%%EOF"
+        pdf_bytes = PDFExporter.generate_pdf_bytes(filename, result)
         return Response(
-            pdf_content,
+            pdf_bytes,
             mimetype="application/pdf",
             headers={"Content-Disposition": f"attachment; filename={filename}.pdf"},
         )
