@@ -134,15 +134,35 @@ class PDFExporter:
             pdf.set_font("Helvetica", size=10)
             for item in report_items:
                 line = item.get("line", "N/A")
-                category = item.get("category", "General")
-                label = item.get("label", "Notice")
-                description = item.get("description", "")
-                header_text = cls._latin1_safe(f"Line {line} | {category} | {label}")
+                status = item.get("status", "")
+                target_statement = item.get("target_statement", "")
+                problem_description = item.get("problem_description", "")
+                explanation = item.get("explanation_text", "")
+                recommendation = item.get("recommendation_text", "")
+                header_text = cls._latin1_safe(f"Line {line} | {status}")
                 for chunk in cls._split_text(header_text, max_chars=90):
                     pdf.multi_cell(page_width, 6, chunk, align="L")
-                if description:
-                    desc_text = cls._latin1_safe(f"  - {description}")
-                    for chunk in cls._split_text(desc_text, max_chars=90):
+                if target_statement:
+                    for chunk in cls._split_text(
+                        cls._latin1_safe(f"Target: {target_statement}"), max_chars=90
+                    ):
+                        pdf.multi_cell(page_width, 6, chunk, align="L")
+                if problem_description:
+                    for chunk in cls._split_text(
+                        cls._latin1_safe(f"Problem: {problem_description}"),
+                        max_chars=90,
+                    ):
+                        pdf.multi_cell(page_width, 6, chunk, align="L")
+                if explanation:
+                    for chunk in cls._split_text(
+                        cls._latin1_safe(f"Explanation: {explanation}"), max_chars=90
+                    ):
+                        pdf.multi_cell(page_width, 6, chunk, align="L")
+                if recommendation:
+                    for chunk in cls._split_text(
+                        cls._latin1_safe(f"Recommendation: {recommendation}"),
+                        max_chars=90,
+                    ):
                         pdf.multi_cell(page_width, 6, chunk, align="L")
                 pdf.ln(1)
 

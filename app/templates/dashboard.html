@@ -34,39 +34,56 @@
         <strong>تنبيه أمني:</strong> تم اكتشاف ثغرات أو مشكلات تحتاج إلى مراجعة فورية قبل الإطلاق أو النشر.
     </div>
     {% endif %}
-    <div class="mb-3">
-        <a href="/export/{{ filename }}/json" class="btn btn-outline-dark btn-immersive">تنزيل التقرير بصيغة JSON</a>
-        <a href="/export/{{ filename }}/html" class="btn btn-outline-secondary btn-immersive ms-2">تنزيل HTML</a>
-        <a href="/export/{{ filename }}/pdf" class="btn btn-outline-secondary btn-immersive ms-2">تنزيل PDF</a>
-    </div>
-    <div class="mb-4 d-flex gap-2 flex-wrap justify-content-end">
-        <button class="btn btn-sm btn-primary btn-immersive" onclick="filterReport('all')">عرض الكل</button>
-        <button class="btn btn-sm btn-secondary btn-immersive" onclick="filterReport('issues')">عرض المشاكل فقط</button>
-        <button class="btn btn-sm btn-warning btn-immersive" onclick="filterReport('warning')">تحذيرات</button>
-        <button class="btn btn-sm btn-danger btn-immersive" onclick="filterReport('critical')">حرج</button>
+    <div class="mb-3 d-flex flex-nowrap align-items-center justify-content-between" style="display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: 0.75rem;">
+        <div class="d-flex gap-2 flex-nowrap align-items-center">
+            <a href="/export/{{ filename }}/json" class="btn btn-outline-dark btn-immersive">تنزيل التقرير بصيغة JSON</a>
+            <a href="/export/{{ filename }}/html" class="btn btn-outline-secondary btn-immersive ms-2">تنزيل HTML</a>
+            <a href="/export/{{ filename }}/pdf" class="btn btn-outline-secondary btn-immersive ms-2">تنزيل PDF</a>
+        </div>
+        <div class="d-flex gap-2 flex-nowrap align-items-center">
+            <button class="btn btn-sm btn-primary btn-immersive" onclick="filterReport('all')">عرض الكل</button>
+            <button class="btn btn-sm btn-secondary btn-immersive" onclick="filterReport('issues')">عرض المشاكل فقط</button>
+            <button class="btn btn-sm btn-warning btn-immersive" onclick="filterReport('warning')">تحذيرات</button>
+            <button class="btn btn-sm btn-danger btn-immersive" onclick="filterReport('critical')">حرج</button>
+        </div>
     </div>
     <div class="table-responsive">
-        <table id="reviewReportTable" class="table table-modern table-bordered align-middle">
+        <table id="reviewReportTable" class="table table-modern table-bordered align-middle" style="table-layout: fixed; width: 100%;">
             <thead class="text-center">
                 <tr>
-                    <th style="width: 6%; color: #ffffff !important;">السطر</th>
-                    <th style="width: 40%; color: #ffffff !important;">العينة البرمجية المفحوصة</th>
-                    <th style="width: 14%; color: #ffffff !important;">فئة التحليل</th>
-                    <th style="width: 10%; color: #ffffff !important;">الحالة</th>
-                    <th style="width: 30%; color: #ffffff !important;">تقرير المشكلة والتوصية الهندسيّة</th>
+                    <th style="width: 2%; color: #ffffff !important;">Line</th>
+                    <th style="width: 40%; color: #ffffff !important;">Inspected Code</th>
+                    <th style="width: 12%; color: #ffffff !important;">Category</th>
+                    <th style="width: 10%; color: #ffffff !important;">Status</th>
+                    <th style="width: 38%; color: #ffffff !important;">Issue Report & Recommendation</th>
                 </tr>
             </thead>
             <tbody>
                 {% if report %}
                     {% for item in report %}
                     <tr class="report-row {% if item.severity == 'critical' %}severity-critical{% elif item.severity == 'warning' %}severity-warning{% else %}severity-safe{% endif %}" data-severity="{{ item.severity }}">
-                        <td class="fw-bold text-center" style="color: #212529 !important;"><code>{{ item.line }}</code></td>
-                        <td class="text-start">
-                            <pre class="mb-0 p-2 bg-white rounded border border-secondary text-dark" style="font-size: 13px; color: #212529 !important;"><code style="color: #212529 !important;">{{ item.code }}</code></pre>
+                        <td class="fw-bold text-center py-2" style="color: #212529 !important;"><code>{{ item.line }}</code></td>
+                        <td class="text-start py-2">
+                            <pre class="mb-0 p-2 bg-white rounded border border-secondary text-dark" style="font-size: 13px; color: #212529 !important; white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; direction: ltr; text-align: left;"><code style="color: #212529 !important;">{{ item.code }}</code></pre>
                         </td>
-                        <td class="text-center"><span class="badge bg-secondary p-2">{{ item.category }}</span></td>
-                        <td class="text-center"><span class="badge {% if item.label == 'مقبول' %}bg-success{% elif item.severity == 'warning' %}bg-warning{% else %}bg-danger{% endif %} p-2">{{ item.label }}</span></td>
-                        <td class="small fw-bold text-start p-3" style="color: #212529 !important; line-height: 1.5;">{{ item.description }}</td>
+                        <td class="text-center py-2"><span class="badge bg-secondary p-2">{{ item.category }}</span></td>
+                        <td class="text-center py-2"><span class="badge {% if item.status == 'السطر سليم برمجياً' %}bg-success{% elif item.status == 'تحذير' %}bg-warning{% else %}bg-danger{% endif %} p-2">{{ item.status }}</span></td>
+                        <td class="small text-start py-2" style="color: #212529 !important; line-height: 1.5;">
+                            <div class="issue-report-block p-2 rounded" style="border: 1px solid #e8eaed; background: #fafbfc; gap: 0.5rem; display: grid;">
+                                <div class="issue-target-block p-2 rounded" style="background: #ffffff; border: 1px solid #dee2e6;">
+                                    <div class="issue-target-label mb-1" style="font-weight: 700; color: #d63384;">🚨 التعليمة المخالفة</div>
+                                    <div class="issue-target-text" style="font-size: 0.95rem;">{{ item.target_statement | safe }}</div>
+                                </div>
+                                <div class="issue-explanation-block p-2 rounded" style="background: #ffffff; border: 1px solid #dee2e6;">
+                                    <div class="issue-explanation-label mb-1" style="font-weight: 700; color: #0d6efd;">📝 شرح المشكلة</div>
+                                    <div class="issue-explanation-text" style="font-size: 0.93rem;">{{ item.explanation_text }}</div>
+                                </div>
+                                <div class="issue-recommendation-block p-2 rounded" style="background: #ffffff; border: 1px solid #dee2e6;">
+                                    <div class="issue-recommendation-label mb-1" style="font-weight: 700; color: #198754;">💡 التوصية والبديل</div>
+                                    <div class="issue-recommendation-text" style="font-size: 0.93rem;">{{ item.recommendation_text }}</div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                     {% endfor %}
                 {% else %}
