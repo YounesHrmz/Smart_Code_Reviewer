@@ -359,14 +359,114 @@ templates = [
     },
 ]
 
+RULE_DETAILS = {
+    "with_open": {
+        "target_statement": "with open()",
+        "problem_description": "فتح الملف دون سياق with يمكن أن يسبب تسرب موارد.",
+        "explanation": "استخدام open() بدون with لا يضمن إغلاق الملف تلقائياً عند انتهاء التنفيذ أو حدوث استثناء.",
+        "recommendation": "استبدل open() بـ with open(...) لإغلاق الملف تلقائياً وإدارة الموارد بشكل آمن.",
+    },
+    "eval": {
+        "target_statement": "eval()",
+        "problem_description": "تنفيذ eval() يعرض التطبيق لحقن كود غير موثوق.",
+        "explanation": "eval() يقوم بتفسير سلسلة نصية ككود بايثون، مما يسمح بتنفيذ أوامر خطيرة من المدخلات.",
+        "recommendation": "استخدم حلول آمنة لتحليل البيانات بدلاً من eval().",
+    },
+    "exec": {
+        "target_statement": "exec()",
+        "problem_description": "استخدام exec() يسمح بتنفيذ كود غير آمن.",
+        "explanation": "exec() ينفذ نص بايثون ديناميكي، مما يجعل من الصعب ضمان سلامة المحتوى.",
+        "recommendation": "استبدل exec() بمنطق ثابت أو واجهات تحليل آمنة.",
+    },
+    "os_system": {
+        "target_statement": "os.system()",
+        "problem_description": "استدعاء os.system() يمكن أن يؤدي لحقن أوامر.",
+        "explanation": "تمرير سلاسل نصية إلى shell قد يؤدي إلى تنفيذ أوامر غير متوقعة.",
+        "recommendation": "استخدم subprocess.run() مع shell=False وتمرير قائمة معاملات.",
+    },
+    "subprocess_shell": {
+        "target_statement": "subprocess.Popen(..., shell=True)",
+        "problem_description": "استخدام shell=True يفتح ثغرة حقن أوامر.",
+        "explanation": "تمرير أمر كسلسلة إلى shell يعرض التطبيق لمخاطر من بيانات المستخدم.",
+        "recommendation": "استعمل قائمة معاملات صريحة و shell=False بدلاً من shell=True.",
+    },
+    "pickle_loads": {
+        "target_statement": "pickle.loads()",
+        "problem_description": "pickle.loads() يعالج بيانات قابلة للتنفيذ قد تحتوي على كود خبيث.",
+        "explanation": "تحميل بيانات pickle من مصدر غير موثوق يمكن أن يؤدي إلى تنفيذ كائنات ضارة.",
+        "recommendation": "استعمل JSON أو بروتوكولات آمنة أخرى بدلاً من pickle.",
+    },
+    "yaml_load": {
+        "target_statement": "yaml.load()",
+        "problem_description": "yaml.load() يقرأ YAML غير آمن.",
+        "explanation": "yaml.load() يمكن أن ينشئ كائنات تنفيذية من المحتوى.",
+        "recommendation": "استخدم yaml.safe_load() وتحقق من مصداقية المصدر.",
+    },
+    "nested_if": {
+        "target_statement": "nested if",
+        "problem_description": "تداخل شرطى عميق يزيد صعوبة القراءة.",
+        "explanation": "الكود المتداخل جداً يجعل تتبع التدفق وفهم المنطق أكثر تعقيداً.",
+        "recommendation": "قسم الشرطيات إلى دوال مساعدة أو استخدم guard clauses.",
+    },
+    "bad_variable_name": {
+        "target_statement": "poor variable naming",
+        "problem_description": "أسماء المتغيرات غير الوصفية تقلل من وضوح الكود.",
+        "explanation": "الأسماء الغامضة مثل tmp أو x لا تعكس الغرض من المتغير.",
+        "recommendation": "استخدم أسماء وصفية تعكس المحتوى أو الوظيفة.",
+    },
+    "semicolon": {
+        "target_statement": "semicolon statement",
+        "problem_description": "استخدام الفاصلة المنقوطة في سطر واحد يقلل من الوضوح.",
+        "explanation": "دمج عدة تعليمات في سطر واحد يجعل الكود أقل قابلية للقراءة.",
+        "recommendation": "افصل التعليمات على أسطر مستقلة.",
+    },
+    "generic": {
+        "target_statement": "generic issue",
+        "problem_description": "تم اكتشاف مشكلة محتملة في هذا المقطع البرمجي.",
+        "explanation": "راجع هذا المقطع برمجياً لتحديد السبب الدقيق وتحسينه.",
+        "recommendation": "حسّن البنية والتسمية لتقليل المخاطر والأخطاء.",
+    },
+}
+
+
+def infer_rule_details(snippet: str, label: str) -> dict:
+    code = snippet.lower()
+    if "eval(" in code:
+        return RULE_DETAILS["eval"]
+    if "exec(" in code:
+        return RULE_DETAILS["exec"]
+    if "os.system" in code:
+        return RULE_DETAILS["os_system"]
+    if "subprocess.Popen" in code and "shell=True" in code:
+        return RULE_DETAILS["subprocess_shell"]
+    if "pickle.loads" in code:
+        return RULE_DETAILS["pickle_loads"]
+    if "yaml.load" in code:
+        return RULE_DETAILS["yaml_load"]
+    if "with open" in code:
+        return RULE_DETAILS["with_open"]
+    if " if " in code and code.count("if ") > 1:
+        return RULE_DETAILS["nested_if"]
+    if any(token in code for token in ["tmp", " x ", " y ", " z "]):
+        return RULE_DETAILS["bad_variable_name"]
+    if ";" in code:
+        return RULE_DETAILS["semicolon"]
+    return RULE_DETAILS["generic"]
+
+
 rows = []
 for example in examples:
+    rule = infer_rule_details(example["snippet"], example["label"])
     rows.append(
         {
             "code_snippet": example["snippet"].strip(),
             "predicted_category": example["category"],
             "predicted_label": example["label"],
             "confidence_score": f"{example['confidence']:.2f}",
+            "target_statement": rule["target_statement"],
+            "problem_description": rule["problem_description"],
+            "explanation": rule["explanation"],
+            "recommendation": rule["recommendation"],
         }
     )
 
@@ -406,12 +506,17 @@ for index in range(1000 - len(rows)):
         )
 
     confidence = round(random.uniform(*template["confidence_range"]), 2)
+    rule = infer_rule_details(snippet, template["label"])
     rows.append(
         {
             "code_snippet": snippet,
             "predicted_category": template["category"],
             "predicted_label": template["label"],
             "confidence_score": f"{confidence:.2f}",
+            "target_statement": rule["target_statement"],
+            "problem_description": rule["problem_description"],
+            "explanation": rule["explanation"],
+            "recommendation": rule["recommendation"],
         }
     )
 
@@ -432,6 +537,10 @@ with path.open("w", encoding="utf-8", newline="") as handle:
             "predicted_category",
             "predicted_label",
             "confidence_score",
+            "target_statement",
+            "problem_description",
+            "explanation",
+            "recommendation",
         ],
     )
     writer.writeheader()
