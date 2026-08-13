@@ -13,6 +13,17 @@ def create_app():
     app = Flask(__name__, template_folder="templates", static_folder="static")
     app.config.from_object(Config)
     Config.init_folders()
+    # Ensure rule templates file exists so operators can edit rules without code changes
+    try:
+        from app.services.review_service import (
+            save_default_rule_templates,
+            reload_rule_templates,
+        )
+
+        save_default_rule_templates()
+        reload_rule_templates()
+    except Exception:
+        pass
     init_db()
 
     @app.route("/")
