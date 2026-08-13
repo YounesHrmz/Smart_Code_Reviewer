@@ -78,6 +78,12 @@ DEFAULT_RULE_TEMPLATES = {
         "explanation": "الاستعلامات غير المهيكلة باستخدام concatenation تسمح بحقن إدخالات ضارة.",
         "actionable_recommendation": "استخدم استعلامات parameterized أو ORM بدلاً من ربط النصوص.",
     },
+    "hardcoded_secret": {
+        "target_statement": "hardcoded secret assignment",
+        "problem_description": "المشكلة: تخزين سر أو مفتاح في الشيفرة في السطر {line_number} داخل {function_name} يعرض السر للانكشاف.",
+        "explanation": "تضمين أسرار مثل كلمات المرور أو مفاتيح API في الشيفرة يؤدي إلى تسربها عبر نظام التحكم بالإصدار أو بيئات النشر.",
+        "actionable_recommendation": "انقل الأسرار إلى متغيرات بيئة أو مدير أسرار (Vault) وطبق تدوير ومراقبة وصول.",
+    },
     "command_injection": {
         "target_statement": "command string concatenation",
         "problem_description": "تمرية أوامر نظامية كسلسلة قد تؤدي إلى حقن أوامر.",
@@ -106,6 +112,53 @@ def _load_rule_templates() -> dict:
 RULE_TEMPLATES = _load_rule_templates()
 
 
+def save_default_rule_templates(path: str = RULE_TEMPLATE_PATH) -> None:
+    """Persist the default RULE_TEMPLATES to disk if no file exists.
+
+    This allows operators to edit the JSON file to tune rule wording without
+    changing source code.
+    """
+    try:
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        if not os.path.exists(path):
+            with open(path, "w", encoding="utf-8") as handle:
+                json.dump(DEFAULT_RULE_TEMPLATES, handle, ensure_ascii=False, indent=2)
+            return
+
+        # If file exists, merge missing default keys without overwriting existing entries
+        try:
+            with open(path, "r", encoding="utf-8") as handle:
+                existing = json.load(handle)
+        except Exception:
+            existing = {}
+
+        merged = dict(existing)
+        changed = False
+        for k, v in DEFAULT_RULE_TEMPLATES.items():
+            if k not in merged:
+                merged[k] = v
+                changed = True
+
+        if changed:
+            with open(path, "w", encoding="utf-8") as handle:
+                json.dump(merged, handle, ensure_ascii=False, indent=2)
+    except Exception:
+        # Best-effort: do not raise to avoid breaking app startup
+        pass
+
+
+def reload_rule_templates() -> None:
+    """Reload the global RULE_TEMPLATES from disk.
+
+    Call this after `save_default_rule_templates` if the file may have been updated.
+    """
+    global RULE_TEMPLATES
+    try:
+        RULE_TEMPLATES = _load_rule_templates()
+    except Exception:
+        pass
+
+
 class CodeReviewService:
     """
     خدمة المراجعة التي تجمع نتائج تحليل AST والقواعد الثابتة مع دورة تعلم آلي محلية.
@@ -123,6 +176,119 @@ class CodeReviewService:
         return code.strip().splitlines()[0][:40]
 
     def _find_rule_key(self, code: str, issues: list[str]) -> str:
+        # Prefer AST-based detection for precise matching
+        try:
+            tree = None
+            try:
+                import ast
+
+                tree = ast.parse(code)
+            except SyntaxError:
+                tree = None
+
+            if tree is not None:
+                # detect hardcoded secret assignments
+                if re.search(
+                    r"(?i)(password|passwd|secret|token|api_key|aws_key|access_key)\s*=\s*['\"][^'\"]+['\"]",
+                    code,
+                ):
+                    return "hardcoded_secret"
+
+                # subprocess.* with shell=True or os.system()
+                for node in ast.walk(tree):
+                    if isinstance(node, ast.Call):
+                        func = node.func
+                        # detect os.system()
+                        if isinstance(func, ast.Attribute) and isinstance(
+                            func.value, ast.Name
+                        ):
+                            if func.value.id == "os" and func.attr == "system":
+                                return "os_system"
+
+                        # detect subprocess.* with shell=True
+                        if isinstance(func, ast.Attribute) and isinstance(
+                            func.value, ast.Name
+                        ):
+                            if func.value.id == "subprocess" and func.attr in (
+                                "Popen",
+                                "call",
+                                "run",
+                                "check_output",
+                            ):
+                                for kw in node.keywords:
+                                    if kw.arg == "shell":
+                                        val = getattr(kw.value, "value", None)
+                                        if val is True:
+                                            return "subprocess_shell"
+
+                        # detect eval/exec/pickle/yaml/open
+                        if isinstance(func, ast.Name):
+                            if func.id == "eval":
+                                return "eval"
+                            if func.id == "exec":
+                                return "exec"
+                            if func.id == "open":
+                                # open used without with (heuristic: snippet doesn't contain 'with')
+                                if "with" not in code.splitlines()[0]:
+                                    return "with_open"
+                            if func.id == "pickle":
+                                return "pickle_loads"
+                            if func.id == "yaml":
+                                return "yaml_load"
+
+                        # attribute calls like pickle.loads or yaml.load
+                        if isinstance(func, ast.Attribute):
+                            if (
+                                getattr(func, "attr", "") == "loads"
+                                and isinstance(func.value, ast.Name)
+                                and func.value.id == "pickle"
+                            ):
+                                return "pickle_loads"
+                            if (
+                                getattr(func, "attr", "") == "load"
+                                and isinstance(func.value, ast.Name)
+                                and func.value.id == "yaml"
+                            ):
+                                return "yaml_load"
+
+                # detect bare except
+                for node in ast.walk(tree):
+                    if isinstance(node, ast.Try):
+                        for handler in node.handlers:
+                            if handler.type is None:
+                                return "generic"  # map to generic but will be categorized by analyzers as best-practice
+
+                # detect SQL concatenation via BinOp in execute calls
+                for node in ast.walk(tree):
+                    if (
+                        isinstance(node, ast.Call)
+                        and isinstance(node.func, ast.Attribute)
+                        and node.func.attr
+                        in (
+                            "execute",
+                            "executemany",
+                            "executescript",
+                        )
+                    ):
+                        for arg in node.args:
+                            if isinstance(arg, ast.BinOp) and isinstance(
+                                arg.op, ast.Add
+                            ):
+                                return "sql_injection"
+
+                # detect semicolon use (simple textual check)
+                if ";" in code:
+                    return "semicolon"
+
+                # detect ambiguous variable names at top-level via Assign or Name
+                if re.search(r"\b(tmp|x|y|z|temp|data|val|var|foo|bar)\b", code):
+                    return "bad_variable_name"
+
+        except Exception:
+            # fall back to regex rules on any failure
+            pass
+
+        # fallback regex heuristics
         normalized = code.lower()
         if re.search(r"\beval\s*\(", normalized):
             return "eval"

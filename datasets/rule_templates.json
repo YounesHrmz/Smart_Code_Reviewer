@@ -1,0 +1,86 @@
+{
+  "with_open": {
+    "target_statement": "<code dir=\"ltr\">with open()</code>",
+    "problem_description": "المشكلة: عبارة {target_statement} في السطر {line_number} داخل {function_name} قد تسبب تسرب موارد.",
+    "explanation": "استخدام <code dir=\"ltr\">open()</code> بدون with لا يضمن إغلاق الملف تلقائياً عند انتهاء التنفيذ أو حدوث خطأ.",
+    "actionable_recommendation": "استبدل <code dir=\"ltr\">open()</code> بـ <code dir=\"ltr\">with open(...)</code> لإدارة الموارد الآمنة."
+  },
+  "eval": {
+    "target_statement": "<code dir=\"ltr\">eval()</code>",
+    "problem_description": "المشكلة: عبارة {target_statement} في السطر {line_number} داخل {function_name} تعرض التطبيق لحقن كود.",
+    "explanation": "<code dir=\"ltr\">eval()</code> يقوم بتفسير سلسلة نصية ككود بايثون، مما يسمح بتنفيذ أوامر ضارة من محتوى المستخدم.",
+    "actionable_recommendation": "استبدل <code dir=\"ltr\">eval()</code> بمكتبات تحليل آمنة أو دوال للتحويل المباشر بدلاً من تنفيذ النصوص."
+  },
+  "exec": {
+    "target_statement": "<code dir=\"ltr\">exec()</code>",
+    "problem_description": "المشكلة: عبارة {target_statement} في السطر {line_number} داخل {function_name} قد تنفذ كوداً غير آمن.",
+    "explanation": "<code dir=\"ltr\">exec()</code> ينفذ نص بايثون ديناميكي، مما يجعل من الصعب ضمان سلامة المحتوى.",
+    "actionable_recommendation": "استبدل <code dir=\"ltr\">exec()</code> بمنطق ثابت أو واجهات تحليل آمنة."
+  },
+  "os_system": {
+    "target_statement": "<code dir=\"ltr\">os.system()</code>",
+    "problem_description": "المشكلة: عبارة {target_statement} في السطر {line_number} داخل {function_name} قد تؤدي إلى حقن أوامر.",
+    "explanation": "تمرير سلاسل نصية إلى shell يعرض النظام لمخاطر تنفيذ أوامر غير متوقعة.",
+    "actionable_recommendation": "استخدم <code dir=\"ltr\">subprocess.run([...], shell=False)</code> بدلاً من <code dir=\"ltr\">os.system()</code>."
+  },
+  "subprocess_shell": {
+    "target_statement": "<code dir=\"ltr\">subprocess.Popen(..., shell=True)</code>",
+    "problem_description": "المشكلة: عبارة {target_statement} في السطر {line_number} داخل {function_name} تعرض التطبيق لحقن أوامر.",
+    "explanation": "تمرير أمر كسلسلة إلى shell يسمح بحقن مدخلات غير آمنة.",
+    "actionable_recommendation": "استخدم قائمة معاملات صريحة و <code dir=\"ltr\">shell=False</code> بدلاً من <code dir=\"ltr\">shell=True</code>."
+  },
+  "pickle_loads": {
+    "target_statement": "<code dir=\"ltr\">pickle.loads()</code>",
+    "problem_description": "المشكلة: عبارة {target_statement} في السطر {line_number} داخل {function_name} قد تعالج بيانات خبيثة.",
+    "explanation": "تحميل بيانات pickle من مصدر غير موثوق يمكن أن يؤدي إلى تنفيذ كائنات ضارة.",
+    "actionable_recommendation": "استخدم <code dir=\"ltr\">json.loads()</code> أو بروتوكولات آمنة بدلاً من pickle."
+  },
+  "yaml_load": {
+    "target_statement": "<code dir=\"ltr\">yaml.load()</code>",
+    "problem_description": "المشكلة: عبارة {target_statement} في السطر {line_number} داخل {function_name} قد تفسر محتوى غير آمن.",
+    "explanation": "<code dir=\"ltr\">yaml.load()</code> يمكن أن ينشئ كائنات تنفيذية من المحتوى.",
+    "actionable_recommendation": "استعمل <code dir=\"ltr\">yaml.safe_load()</code> وتحقق من مصدر البيانات."
+  },
+  "nested_if": {
+    "target_statement": "nested if",
+    "problem_description": "التداخل الشرطي العميق يزيد صعوبة القراءة والصيانة.",
+    "explanation": "الكود المتداخل جداً يجعل تتبع التدفق وفهم المنطق أكثر تعقيداً.",
+    "actionable_recommendation": "قلل التداخل بفصل الشرطيات إلى دوال مساعدة أو استخدم guard clauses."
+  },
+  "bad_variable_name": {
+    "target_statement": "poor variable naming",
+    "problem_description": "استخدام أسماء متغيرات غير معبرة يقلل من وضوح الكود.",
+    "explanation": "الأسماء الغامضة مثل <code dir=\"ltr\">tmp</code> أو <code dir=\"ltr\">x</code> لا تعبر عن الغرض.",
+    "actionable_recommendation": "استخدم أسماء وصفية تعبر عن المحتوى أو الوظيفة."
+  },
+  "semicolon": {
+    "target_statement": "semicolon statement",
+    "problem_description": "استخدام الفاصلة المنقوطة في سطر واحد يقلل من الوضوح.",
+    "explanation": "دمج عدة تعليمات في سطر واحد يجعل الكود أقل قابلية للقراءة.",
+    "actionable_recommendation": "افصل التعليمات على أسطر مستقلة واحتفظ بتعبير واحد لكل سطر."
+  },
+  "sql_injection": {
+    "target_statement": "sql string concatenation",
+    "problem_description": "بناء استعلام SQL عن طريق ربط سلاسل نصية يعرض النظام لحقن بيانات.",
+    "explanation": "الاستعلامات غير المهيكلة باستخدام concatenation تسمح بحقن إدخالات ضارة.",
+    "actionable_recommendation": "استخدم استعلامات parameterized أو ORM بدلاً من ربط النصوص."
+  },
+  "command_injection": {
+    "target_statement": "command string concatenation",
+    "problem_description": "تمرية أوامر نظامية كسلسلة قد تؤدي إلى حقن أوامر.",
+    "explanation": "تمرير مدخلات المستخدم مباشرة إلى دوال النظام يفتح باب تنفيذ أوامر غير آمنة.",
+    "actionable_recommendation": "استخدم قائمة معاملات ولا تفعّل <code dir=\"ltr\">shell</code> إذا أمكن."
+  },
+  "generic": {
+    "target_statement": "problematic statement",
+    "problem_description": "تم اكتشاف مشكلة في هذا المقطع البرمجي.",
+    "explanation": "هذا المقطع يحتاج مراجعة لتحديد السبب الدقيق وتحسين الجودة.",
+    "actionable_recommendation": "راجع الكود وحسّن الهيكلية والتسمية لتقليل المخاطر."
+  },
+  "hardcoded_secret": {
+    "target_statement": "hardcoded secret assignment",
+    "problem_description": "المشكلة: تخزين سر أو مفتاح في الشيفرة في السطر {line_number} داخل {function_name} يعرض السر للانكشاف.",
+    "explanation": "تضمين أسرار مثل كلمات المرور أو مفاتيح API في الشيفرة يؤدي إلى تسربها عبر نظام التحكم بالإصدار أو بيئات النشر.",
+    "actionable_recommendation": "انقل الأسرار إلى متغيرات بيئة أو مدير أسرار (Vault) وطبق تدوير ومراقبة وصول."
+  }
+}
