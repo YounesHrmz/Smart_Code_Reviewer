@@ -1,6 +1,9 @@
+import ast
 import json
 import os
 import re
+from typing import Any, Dict, List, Tuple
+
 from app.analyzers.ast_parser import ASTParser
 from app.analyzers.clean_code_rule import CleanCodeAnalyzer
 from app.analyzers.complexity_rule import ComplexityAnalyzer
@@ -11,7 +14,8 @@ from app.repositories.audit_repository import AuditRepository
 
 RULE_TEMPLATE_PATH = os.path.join(Config.DATASET_DIR, "rule_templates.json")
 
-DEFAULT_RULE_TEMPLATES = {
+
+DEFAULT_RULE_TEMPLATES: Dict[str, Dict[str, str]] = {
     "with_open": {
         "target_statement": '<code dir="ltr">with open()</code>',
         "problem_description": "المشكلة: عبارة {target_statement} في السطر {line_number} داخل {function_name} قد تسبب تسرب موارد.",
@@ -99,13 +103,14 @@ DEFAULT_RULE_TEMPLATES = {
 }
 
 
-def _load_rule_templates() -> dict:
+def _load_rule_templates() -> Dict[str, Dict[str, str]]:
+    """Load rule templates from JSON file or fall back to defaults."""
     if os.path.exists(RULE_TEMPLATE_PATH):
         try:
-            with open(RULE_TEMPLATE_PATH, "r", encoding="utf-8") as handle:
-                return json.load(handle)
-        except (OSError, ValueError):
-            pass
+            with open(RULE_TEMPLATE_PATH, "r", encoding="utf-8") as fh:
+                return json.load(fh)
+        except Exception:
+            return DEFAULT_RULE_TEMPLATES
     return DEFAULT_RULE_TEMPLATES
 
 
@@ -113,182 +118,130 @@ RULE_TEMPLATES = _load_rule_templates()
 
 
 def save_default_rule_templates(path: str = RULE_TEMPLATE_PATH) -> None:
-    """Persist the default RULE_TEMPLATES to disk if no file exists.
+    """Persist default templates and merge missing keys into existing file.
 
-    This allows operators to edit the JSON file to tune rule wording without
-    changing source code.
+    Non-fatal: failures are ignored to avoid breaking app startup.
     """
     try:
         os.makedirs(os.path.dirname(path), exist_ok=True)
         if not os.path.exists(path):
-            with open(path, "w", encoding="utf-8") as handle:
-                json.dump(DEFAULT_RULE_TEMPLATES, handle, ensure_ascii=False, indent=2)
+            with open(path, "w", encoding="utf-8") as fh:
+                json.dump(DEFAULT_RULE_TEMPLATES, fh, ensure_ascii=False, indent=2)
             return
 
-        # If file exists, merge missing default keys without overwriting existing entries
-        try:
-            with open(path, "r", encoding="utf-8") as handle:
-                existing = json.load(handle)
-        except Exception:
-            existing = {}
+        with open(path, "r", encoding="utf-8") as fh:
+            existing = json.load(fh)
 
         merged = dict(existing)
         changed = False
-        for k, v in DEFAULT_RULE_TEMPLATES.items():
-            if k not in merged:
-                merged[k] = v
+        for key, val in DEFAULT_RULE_TEMPLATES.items():
+            if key not in merged:
+                merged[key] = val
                 changed = True
 
         if changed:
-            with open(path, "w", encoding="utf-8") as handle:
-                json.dump(merged, handle, ensure_ascii=False, indent=2)
+            with open(path, "w", encoding="utf-8") as fh:
+                json.dump(merged, fh, ensure_ascii=False, indent=2)
     except Exception:
-        # Best-effort: do not raise to avoid breaking app startup
-        pass
+        return
 
 
 def reload_rule_templates() -> None:
-    """Reload the global RULE_TEMPLATES from disk.
-
-    Call this after `save_default_rule_templates` if the file may have been updated.
-    """
+    """Reload templates into module-level `RULE_TEMPLATES`."""
     global RULE_TEMPLATES
-    try:
-        RULE_TEMPLATES = _load_rule_templates()
-    except Exception:
-        pass
+    RULE_TEMPLATES = _load_rule_templates()
 
 
 class CodeReviewService:
-    """
-    خدمة المراجعة التي تجمع نتائج تحليل AST والقواعد الثابتة مع دورة تعلم آلي محلية.
+    """Static code review service combining AST rules and a learning loop.
+
+    Responsibilities:
+    - Run analyzers per snippet
+    - Map analyzer findings to rule templates
+    - Persist audit logs
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.learning_loop = AutonomousLearningLoop()
         self.audit_repo = AuditRepository()
 
-    def _format_code_reference(self, code: str) -> str:
-        words = [w for w in code.replace("(", " ").replace(")", " ").split() if w]
-        for token in reversed(words):
-            if token.isidentifier() and len(token) > 1:
-                return token
+    @staticmethod
+    def _format_reference(code: str) -> str:
+        tokens = [tok for tok in re.split(r"\W+", code) if tok]
+        for tok in reversed(tokens):
+            if tok.isidentifier() and len(tok) > 1:
+                return tok
         return code.strip().splitlines()[0][:40]
 
-    def _find_rule_key(self, code: str, issues: list[str]) -> str:
-        # Prefer AST-based detection for precise matching
+    def _find_rule_key(self, code: str, issues: List[str]) -> str:
+        """Determine the best matching rule key using AST-aware checks.
+
+        Falls back to regex heuristics when AST parsing fails.
+        """
         try:
+            tree = ast.parse(code)
+        except SyntaxError:
             tree = None
-            try:
-                import ast
 
-                tree = ast.parse(code)
-            except SyntaxError:
-                tree = None
+        # quick regex for hardcoded secrets (fast path)
+        if re.search(
+            r"(?i)(password|passwd|secret|token|api_key|aws_key|access_key)\s*=\s*['\"][^'\"]+['\"]",
+            code,
+        ):
+            return "hardcoded_secret"
 
-            if tree is not None:
-                # detect hardcoded secret assignments
-                if re.search(
-                    r"(?i)(password|passwd|secret|token|api_key|aws_key|access_key)\s*=\s*['\"][^'\"]+['\"]",
-                    code,
-                ):
-                    return "hardcoded_secret"
-
-                # subprocess.* with shell=True or os.system()
-                for node in ast.walk(tree):
-                    if isinstance(node, ast.Call):
-                        func = node.func
-                        # detect os.system()
-                        if isinstance(func, ast.Attribute) and isinstance(
-                            func.value, ast.Name
-                        ):
-                            if func.value.id == "os" and func.attr == "system":
-                                return "os_system"
-
-                        # detect subprocess.* with shell=True
-                        if isinstance(func, ast.Attribute) and isinstance(
-                            func.value, ast.Name
-                        ):
-                            if func.value.id == "subprocess" and func.attr in (
-                                "Popen",
-                                "call",
-                                "run",
-                                "check_output",
-                            ):
-                                for kw in node.keywords:
-                                    if kw.arg == "shell":
-                                        val = getattr(kw.value, "value", None)
-                                        if val is True:
-                                            return "subprocess_shell"
-
-                        # detect eval/exec/pickle/yaml/open
-                        if isinstance(func, ast.Name):
-                            if func.id == "eval":
-                                return "eval"
-                            if func.id == "exec":
-                                return "exec"
-                            if func.id == "open":
-                                # open used without with (heuristic: snippet doesn't contain 'with')
-                                if "with" not in code.splitlines()[0]:
-                                    return "with_open"
-                            if func.id == "pickle":
-                                return "pickle_loads"
-                            if func.id == "yaml":
-                                return "yaml_load"
-
-                        # attribute calls like pickle.loads or yaml.load
-                        if isinstance(func, ast.Attribute):
-                            if (
-                                getattr(func, "attr", "") == "loads"
-                                and isinstance(func.value, ast.Name)
-                                and func.value.id == "pickle"
-                            ):
-                                return "pickle_loads"
-                            if (
-                                getattr(func, "attr", "") == "load"
-                                and isinstance(func.value, ast.Name)
-                                and func.value.id == "yaml"
-                            ):
-                                return "yaml_load"
-
-                # detect bare except
-                for node in ast.walk(tree):
-                    if isinstance(node, ast.Try):
-                        for handler in node.handlers:
-                            if handler.type is None:
-                                return "generic"  # map to generic but will be categorized by analyzers as best-practice
-
-                # detect SQL concatenation via BinOp in execute calls
-                for node in ast.walk(tree):
-                    if (
-                        isinstance(node, ast.Call)
-                        and isinstance(node.func, ast.Attribute)
-                        and node.func.attr
-                        in (
-                            "execute",
-                            "executemany",
-                            "executescript",
-                        )
+        if tree is not None:
+            # detect dangerous calls and patterns precisely
+            for node in ast.walk(tree):
+                if isinstance(node, ast.Call):
+                    func = node.func
+                    # os.system()
+                    if isinstance(func, ast.Attribute) and isinstance(
+                        func.value, ast.Name
                     ):
-                        for arg in node.args:
-                            if isinstance(arg, ast.BinOp) and isinstance(
-                                arg.op, ast.Add
-                            ):
-                                return "sql_injection"
+                        if func.value.id == "os" and func.attr == "system":
+                            return "os_system"
+                        if func.value.id == "subprocess" and func.attr in (
+                            "Popen",
+                            "call",
+                            "run",
+                            "check_output",
+                        ):
+                            for kw in getattr(node, "keywords", []):
+                                if (
+                                    kw.arg == "shell"
+                                    and getattr(kw.value, "value", None) is True
+                                ):
+                                    return "subprocess_shell"
 
-                # detect semicolon use (simple textual check)
-                if ";" in code:
-                    return "semicolon"
+                    # direct name calls: eval, exec, open, pickle/yaml names
+                    if isinstance(func, ast.Name):
+                        if func.id in ("eval", "exec"):
+                            return func.id
+                        if func.id == "open" and "with" not in code.splitlines()[0]:
+                            return "with_open"
 
-                # detect ambiguous variable names at top-level via Assign or Name
-                if re.search(r"\b(tmp|x|y|z|temp|data|val|var|foo|bar)\b", code):
-                    return "bad_variable_name"
+                    # attribute calls like pickle.loads or yaml.load
+                    if isinstance(func, ast.Attribute) and isinstance(
+                        func.value, ast.Name
+                    ):
+                        if func.value.id == "pickle" and func.attr == "loads":
+                            return "pickle_loads"
+                        if func.value.id == "yaml" and func.attr == "load":
+                            return "yaml_load"
 
-        except Exception:
-            # fall back to regex rules on any failure
-            pass
+            # SQL concatenation detection
+            for node in ast.walk(tree):
+                if (
+                    isinstance(node, ast.Call)
+                    and isinstance(node.func, ast.Attribute)
+                    and node.func.attr in ("execute", "executemany", "executescript")
+                ):
+                    for arg in node.args:
+                        if isinstance(arg, ast.BinOp) and isinstance(arg.op, ast.Add):
+                            return "sql_injection"
 
-        # fallback regex heuristics
+        # fallback heuristics
         normalized = code.lower()
         if re.search(r"\beval\s*\(", normalized):
             return "eval"
@@ -296,7 +249,7 @@ class CodeReviewService:
             return "exec"
         if re.search(r"\bos\.system\s*\(", normalized):
             return "os_system"
-        if "subprocess.popen" in normalized and "shell=True" in normalized:
+        if "subprocess.popen" in normalized and "shell=true" in normalized:
             return "subprocess_shell"
         if re.search(r"\bpickle\.loads\s*\(", normalized):
             return "pickle_loads"
@@ -306,8 +259,6 @@ class CodeReviewService:
             r"\bwith\s+open\s*\(", normalized
         ):
             return "with_open"
-        if any(keyword in normalized for keyword in ["nested", "تداخل"]):
-            return "nested_if"
         if re.search(r"\b(tmp|x|y|z|temp|data|val|var|foo|bar)\b", normalized):
             return "bad_variable_name"
         if ";" in code:
