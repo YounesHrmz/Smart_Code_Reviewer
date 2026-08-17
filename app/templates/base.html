@@ -604,6 +604,409 @@
             }
         }
         
+        /* Dark mode status badge */
+        body[data-theme="dark"] .status-badge {
+            background: rgba(30, 41, 59, 0.6) !important;
+            border: 1px solid rgba(100, 116, 139, 0.3) !important;
+        }
+        
+        body[data-theme="dark"] .status-badge span.fw-bold {
+            color: #818cf8;
+        }
+        
+        body[data-theme="dark"] .status-badge span.small {
+            color: #cbd5e1;
+        }
+        
+        body[data-theme="dark"] .hero-panel .lead {
+            opacity: 0.9;
+        }
+        
+        /* ========== LIGHT MODE SPECIFIC OVERRIDES ========== */
+        body[data-theme="light"] {
+            background-color: #f8fafc;
+            background-image: 
+                radial-gradient(circle at top right, rgba(79, 70, 229, 0.06), transparent 24%),
+                radial-gradient(circle at bottom left, rgba(6, 182, 212, 0.06), transparent 30%),
+                linear-gradient(135deg, #f8fafc, #f1f5f9);
+        }
+        
+        /* Light mode navbar */
+        body[data-theme="light"] .navbar-shell {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+        }
+        
+        body[data-theme="light"] .navbar-shell .navbar-brand {
+            color: #1e293b !important;
+        }
+        
+        body[data-theme="light"] .soft-pill {
+            background-color: #f1f5f9;
+            color: #475569;
+            border-color: #e2e8f0;
+        }
+        
+        /* Light mode theme toggle */
+        body[data-theme="light"] .theme-toggle {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            border-color: #e2e8f0;
+        }
+        
+        body[data-theme="light"] .theme-toggle:hover {
+            background-color: #e2e8f0;
+            border-color: #4f46e5;
+            color: #1e293b;
+        }
+        
+        /* Light mode hero panel */
+        body[data-theme="light"] .hero-panel {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.04), rgba(6, 182, 212, 0.04));
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        
+        body[data-theme="light"] .hero-panel h1 {
+            color: #1e293b;
+        }
+        
+        body[data-theme="light"] .hero-panel p {
+            color: #475569;
+        }
+        
+        body[data-theme="light"] .hero-panel .lead {
+            opacity: 0.95;
+        }
+        
+        /* Light mode status badge (top of hero) */
+        body[data-theme="light"] .status-badge {
+            background: #ffffff !important;
+            border: 1px solid #e2e8f0 !important;
+        }
+        
+        body[data-theme="light"] .status-badge span.fw-bold {
+            color: #4f46e5;
+        }
+        
+        body[data-theme="light"] .status-badge span.small {
+            color: #475569;
+        }
+        
+        body[data-theme="light"] .hero-panel > div[style*="background: rgba(255,255,255"]  {
+            background: #ffffff !important;
+            border-color: #e2e8f0 !important;
+        }
+        
+        body[data-theme="light"] .hero-panel > div span.fw-bold {
+            color: #4f46e5;
+        }
+        
+        body[data-theme="light"] .hero-panel > div span.small {
+            color: #475569;
+        }
+        body[data-theme="light"] .chip {
+            border-radius: 9999px;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: inline-block;
+            transition: all var(--transition-base);
+        }
+        
+        body[data-theme="light"] .chip.bg-primary {
+            background-color: #e0e7ff;
+            color: #0f172a;
+            border: 1px solid #c7d2fe;
+        }
+        
+        body[data-theme="light"] .chip.bg-success {
+            background-color: #dcfce7;
+            color: #0f172a;
+            border: 1px solid #bbf7d0;
+        }
+        
+        body[data-theme="light"] .chip.bg-warning {
+            background-color: #fef08a;
+            color: #0f172a;
+            border: 1px solid #fde047;
+        }
+        
+        body[data-theme="light"] .chip.bg-info {
+            background-color: #cffafe;
+            color: #0f172a;
+            border: 1px solid #a5f3fc;
+        }
+        
+        body[data-theme="light"] .chip.bg-primary.text-white,
+        body[data-theme="light"] .chip.bg-success.text-white,
+        body[data-theme="light"] .chip.bg-info.text-white {
+            color: #0f172a !important;
+        }
+        
+        body[data-theme="light"] .chip.bg-warning.text-dark {
+            color: #0f172a !important;
+        }
+        
+        /* Light mode feature cards */
+        body[data-theme="light"] .feature-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+            color: #1e293b;
+        }
+        
+        body[data-theme="light"] .feature-card:hover {
+            border-color: #4f46e5;
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.1);
+            background-color: #ffffff;
+        }
+        
+        body[data-theme="light"] .feature-card h6 {
+            color: #1e293b;
+            font-weight: 600;
+        }
+        
+        body[data-theme="light"] .feature-card small {
+            color: #64748b;
+            line-height: 1.5;
+        }
+        
+        /* Light mode glass card (main form container) */
+        body[data-theme="light"] .glass-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            color: #1e293b;
+        }
+        
+        body[data-theme="light"] .glass-card:hover {
+            border-color: #4f46e5;
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.1);
+        }
+        
+        body[data-theme="light"] .glass-card h4,
+        body[data-theme="light"] .glass-card h5,
+        body[data-theme="light"] .glass-card h6 {
+            color: #1e293b;
+        }
+        
+        body[data-theme="light"] .glass-card p,
+        body[data-theme="light"] .glass-card small {
+            color: #475569;
+        }
+        
+        /* Light mode metric cards */
+        body[data-theme="light"] .metric-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+        }
+        
+        body[data-theme="light"] .metric-card:hover {
+            border-color: #4f46e5;
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.1);
+        }
+        
+        body[data-theme="light"] .metric-card h6 {
+            color: #64748b;
+        }
+        
+        body[data-theme="light"] .metric-card h1,
+        body[data-theme="light"] .metric-card h2 {
+            color: #1e293b;
+        }
+        
+        /* Light mode form controls */
+        body[data-theme="light"] .form-control,
+        body[data-theme="light"] .form-select {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            color: #1e293b;
+        }
+        
+        body[data-theme="light"] .form-control::placeholder {
+            color: #94a3b8;
+        }
+        
+        body[data-theme="light"] .form-control:focus,
+        body[data-theme="light"] .form-select:focus {
+            border-color: #4f46e5;
+            background-color: #ffffff;
+            color: #1e293b;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        
+        body[data-theme="light"] .form-control.form-control-lg {
+            padding: 0.875rem 1.25rem;
+            font-size: 1rem;
+        }
+        
+        body[data-theme="light"] .form-label {
+            color: #1e293b;
+            font-weight: 600;
+        }
+        
+        /* Light mode file input styling */
+        body[data-theme="light"] input[type="file"]::file-selector-button {
+            background-color: #4f46e5;
+            color: #ffffff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all var(--transition-base);
+        }
+        
+        body[data-theme="light"] input[type="file"]::file-selector-button:hover {
+            background-color: #4338ca;
+            transform: translateY(-2px);
+        }
+        
+        /* Light mode buttons */
+        body[data-theme="light"] .btn-dark {
+            background: linear-gradient(135deg, #4f46e5, #8b5cf6);
+            color: #ffffff;
+            border: none;
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.25);
+        }
+        
+        body[data-theme="light"] .btn-dark:hover {
+            background: linear-gradient(135deg, #4338ca, #7c3aed);
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
+            transform: translateY(-2px);
+            color: #ffffff;
+        }
+        
+        body[data-theme="light"] .btn-dark:active {
+            transform: translateY(0);
+        }
+        
+        body[data-theme="light"] .btn-outline-dark {
+            border: 2px solid #1e293b;
+            color: #1e293b;
+            background-color: transparent;
+        }
+        
+        body[data-theme="light"] .btn-outline-dark:hover {
+            background-color: #1e293b;
+            color: #ffffff;
+        }
+        
+        /* Light mode alerts */
+        body[data-theme="light"] .alert {
+            background-color: #f8fafc;
+            border-color: #e2e8f0;
+            color: #1e293b;
+        }
+        
+        body[data-theme="light"] .alert-info {
+            background-color: #f0f9ff;
+            border-color: #bae6fd;
+            color: #0c4a6e;
+        }
+        
+        body[data-theme="light"] .alert-danger {
+            background-color: #fef2f2;
+            border-color: #fecaca;
+            color: #7f1d1d;
+        }
+        
+        /* Light mode tables */
+        body[data-theme="light"] .table-modern {
+            color: #1e293b;
+        }
+        
+        body[data-theme="light"] .table-modern thead th {
+            background-color: #f8fafc;
+            color: #1e293b;
+            font-weight: 600;
+            border-bottom: 2px solid #e2e8f0;
+            border-color: #e2e8f0;
+        }
+        
+        body[data-theme="light"] .table-modern tbody tr {
+            border-bottom-color: #e2e8f0;
+        }
+        
+        body[data-theme="light"] .table-modern tbody tr:hover {
+            background-color: #f8fafc;
+        }
+        
+        body[data-theme="light"] .table-modern tbody td {
+            color: #1e293b;
+        }
+        
+        /* Light mode code blocks */
+        body[data-theme="light"] code {
+            background-color: #f1f5f9;
+            color: #0f172a;
+        }
+        
+        body[data-theme="light"] pre {
+            background-color: #f8fafc;
+            color: #0f172a;
+            border-color: #e2e8f0;
+        }
+        
+        /* Light mode severity indicators */
+        body[data-theme="light"] .severity-critical {
+            border-left-color: #dc2626;
+            background-color: #fef2f2;
+        }
+        
+        body[data-theme="light"] .severity-warning {
+            border-left-color: #ea580c;
+            background-color: #fff7ed;
+        }
+        
+        body[data-theme="light"] .severity-safe {
+            border-left-color: #16a34a;
+            background-color: #f0fdf4;
+        }
+        
+        /* Light mode text utilities */
+        body[data-theme="light"] .text-primary {
+            color: #4f46e5 !important;
+        }
+        
+        body[data-theme="light"] .text-secondary {
+            color: #64748b !important;
+        }
+        
+        body[data-theme="light"] .text-muted {
+            color: #94a3b8 !important;
+        }
+        
+        body[data-theme="light"] .text-danger {
+            color: #dc2626 !important;
+        }
+        
+        body[data-theme="light"] .text-warning {
+            color: #ea580c !important;
+        }
+        
+        body[data-theme="light"] .text-success {
+            color: #16a34a !important;
+        }
+        
+        body[data-theme="light"] .text-info {
+            color: #0284c7 !important;
+        }
+        
+        /* Light mode floating blobs background animation */
+        body[data-theme="light"]::before {
+            background: #4f46e5;
+            opacity: 0.08;
+        }
+        
+        body[data-theme="light"]::after {
+            background: #06b6d4;
+            opacity: 0.08;
+        }
+        
         /* ========== RESPONSIVE ========== */
         @media (max-width: 768px) {
             .glass-card,
