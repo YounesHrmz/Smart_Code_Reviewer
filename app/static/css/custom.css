@@ -1,6 +1,29 @@
-﻿body {
-    background-color: #f3f6ff;
-    color: #14213d;
+﻿:root {
+    --bg: #f3f6ff;
+    --surface: rgba(255,255,255,0.84);
+    --text: #15223b;
+    --text-secondary: #4b5563;
+    --muted: #60708f;
+    --border: rgba(20,40,60,0.09);
+    --accent: #4f46e5;
+    --danger: #ef476f;
+    --warning: #f59e0b;
+    --success: #22c55e;
+    --code-bg: #f5f5f5;
+    --code-text: #1e1e1e;
+}
+
+body[data-theme="dark"] {
+    --text: #edf4ff;
+    --text-secondary: #b0c4e0;
+    --code-bg: #1e293b;
+    --code-text: #e2e8f0;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .navbar-shell {
@@ -9,6 +32,15 @@
 
 .glass-card {
     border-radius: 18px;
+    transition: all 0.2s ease;
+}
+
+.glass-card:hover {
+    box-shadow: 0 12px 40px rgba(79,70,229,0.15);
+}
+
+body[data-theme="dark"] .glass-card:hover {
+    box-shadow: 0 12px 40px rgba(124,147,255,0.1);
 }
 
 .btn-immersive {
@@ -21,6 +53,32 @@
 
 .report-row {
     transition: background-color 0.2s ease;
+}
+
+code {
+    background-color: var(--code-bg);
+    color: var(--code-text);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+pre {
+    background-color: var(--code-bg);
+    color: var(--code-text);
+    border-color: var(--border);
+}
+
+.alert {
+    transition: all 0.2s ease;
+}
+
+.badge {
+    transition: all 0.2s ease;
+}
+
+.form-control {
+    transition: all 0.2s ease;
 }
 
 @media (max-width: 768px) {
