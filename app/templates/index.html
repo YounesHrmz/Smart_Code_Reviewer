@@ -41,17 +41,8 @@
         <div class="glass-card p-4 p-md-5 fade-in">
             <form action="/review" method="POST" enctype="multipart/form-data">
                 <div class="mb-4 text-start">
-                    <label for="code_files" class="form-label fw-bold fs-5">اختر ملفات بايثون متعددة (.py)</label>
-                    <input class="form-control form-control-lg border-2" type="file" id="code_files" name="code_files" accept=".py" multiple>
-                </div>
-                <div class="mb-4 text-start">
-                    <label for="code_file" class="form-label fw-bold fs-5">اختر ملف بايثون واحد (.py)</label>
-                    <input class="form-control form-control-lg border-2" type="file" id="code_file" name="code_file" accept=".py">
-                </div>
-                <div class="mb-4 text-start">
-                    <label for="code_text" class="form-label fw-bold fs-5">أو ألصق الكود مباشرة</label>
-                    <textarea class="form-control" id="code_text" name="code_text" rows="10" placeholder="أدخل كود Python هنا للتحليل الفوري..."></textarea>
-                    <input type="hidden" name="analysis_mode" value="text">
+                    <label for="code_file" class="form-label fw-bold fs-5">اختر ملف بايثون (.py)</label>
+                    <input class="form-control form-control-lg border-2" type="file" id="code_file" name="code_file" accept=".py" required>
                 </div>
                 <button type="submit" class="btn btn-dark btn-lg px-5 shadow-sm fw-bold btn-immersive">ابدأ التحليل</button>
             </form>
