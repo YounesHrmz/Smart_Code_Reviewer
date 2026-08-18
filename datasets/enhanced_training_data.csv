@@ -1,0 +1,617 @@
+code_snippet,predicted_category,predicted_label,confidence_score
+"def delete_all():
+    import os
+    os.system('rm -rf /')",security,bad,0.98
+"def run_command(cmd):
+    import subprocess
+    return subprocess.call(cmd, shell=True)",security,bad,0.97
+"def load_data(data):
+    import pickle
+    return pickle.loads(data)",security,bad,0.96
+"def parse_yaml(data):
+    import yaml
+    return yaml.load(data)",security,bad,0.95
+"def execute_user_code(code):
+    return eval(code)",security,bad,0.98
+"def get_db_password():
+    return ""admin123""  # Hardcoded password",security,bad,0.97
+"def connect_to_db(host, user, passwd):
+    return f""mongodb://{user}:{passwd}@{host}:27017""",security,bad,0.95
+"def delete_file_safely(path):
+    import os
+    if os.path.exists(path) and os.path.isfile(path):
+        os.remove(path)
+        return True
+    return False",security,good,0.94
+"import subprocess
+
+def run_command_safely(cmd_args):
+    return subprocess.run(cmd_args, capture_output=True, text=True, check=False)",security,good,0.95
+"import json
+
+def load_data_safely(data):
+    try:
+        return json.loads(data)
+    except json.JSONDecodeError:
+        return None",security,good,0.96
+"import yaml
+
+def parse_yaml_safely(data):
+    return yaml.safe_load(data)",security,good,0.97
+"def calculate_safely(expr):
+    import ast
+    import operator
+    allowed_ops = {
+        ast.Add: operator.add,
+        ast.Sub: operator.sub,
+        ast.Mult: operator.mul,
+        ast.Div: operator.truediv,
+    }
+    # Implement safe evaluation
+    return None",security,good,0.95
+"import os
+
+def get_api_key():
+    return os.environ.get('API_KEY', '')",security,good,0.98
+"import os
+
+def get_db_credentials():
+    return {
+        'host': os.environ.get('DB_HOST'),
+        'user': os.environ.get('DB_USER'),
+        'password': os.environ.get('DB_PASSWORD')
+    }",security,good,0.96
+"def calc(x, y):
+    res = x + y
+    return res",clean_code,bad,0.88
+"def process(data):
+    tmp = []
+    for item in data:
+        if item is not None:
+            tmp.append(item)
+    return tmp",clean_code,bad,0.87
+"def do_stuff(a, b):
+    z = a + b
+    return z",clean_code,bad,0.86
+"def f(x):
+    y = x * 2
+    return y",clean_code,bad,0.85
+"def calculate(a, b, c, d):
+    result1 = a + b
+    result2 = c + d
+    return result1 * result2",clean_code,bad,0.84
+"def calculate_average(numbers):
+    """"""Calculate the average of a list of numbers.""""""
+    if not numbers:
+        return 0
+    return sum(numbers) / len(numbers)",clean_code,good,0.97
+"def filter_non_empty(items):
+    """"""Filter out None and empty items from a list.""""""
+    return [item for item in items if item is not None and item != '']",clean_code,good,0.96
+"def process_user_data(user_data):
+    """"""Process user data and return cleaned information.""""""
+    cleaned = {
+        'username': user_data.get('username', '').strip(),
+        'email': user_data.get('email', '').strip().lower(),
+        'age': user_data.get('age', 0)
+    }
+    return cleaned",clean_code,good,0.95
+"def validate_input(value, min_val=0, max_val=100):
+    """"""Validate that a value is within a given range.""""""
+    if not isinstance(value, (int, float)):
+        return False
+    return min_val <= value <= max_val",clean_code,good,0.96
+"def complex_nested(x, y, z):
+    if x > 0:
+        if y > 0:
+            if z > 0:
+                return True
+            else:
+                return False
+        else:
+            return False
+    else:
+        return False",quality,bad,0.90
+"def deep_nesting(a, b, c, d, e):
+    if a > 0:
+        if b > 0:
+            if c > 0:
+                if d > 0:
+                    if e > 0:
+                        return ""All positive""
+                    else:
+                        return ""e not positive""
+                else:
+                    return ""d not positive""
+            else:
+                return ""c not positive""
+        else:
+            return ""b not positive""
+    else:
+        return ""a not positive""",quality,bad,0.92
+"def recursive_function(n):
+    if n > 0:
+        return recursive_function(n-1) + recursive_function(n-2)
+    return n",quality,bad,0.88
+"def many_conditions(x):
+    if x < 0:
+        return ""negative""
+    elif x == 0:
+        return ""zero""
+    elif x > 0 and x < 10:
+        return ""small""
+    elif x >= 10 and x < 20:
+        return ""medium""
+    elif x >= 20 and x < 50:
+        return ""large""
+    else:
+        return ""very large""",quality,bad,0.87
+"def check_positive_values(*args):
+    """"""Check if all values are positive.""""""
+    return all(val > 0 for val in args)",quality,good,0.94
+"def validate_positive(value):
+    """"""Validate that a value is positive.""""""
+    return value > 0",quality,good,0.95
+"def get_value_category(x):
+    """"""Categorize a numeric value.""""""
+    if x < 0:
+        return ""negative""
+    if x == 0:
+        return ""zero""
+    if x < 10:
+        return ""small""
+    if x < 20:
+        return ""medium""
+    if x < 50:
+        return ""large""
+    return ""very large""",quality,good,0.93
+"def fibonacci(n, memo={}):
+    """"""Calculate Fibonacci number with memoization.""""""
+    if n in memo:
+        return memo[n]
+    if n <= 1:
+        return n
+    memo[n] = fibonacci(n-1, memo) + fibonacci(n-2, memo)
+    return memo[n]",quality,good,0.94
+"def process_items(items):
+    """"""Process items with clear logic and early returns.""""""
+    if not items:
+        return []
+
+    result = []
+    for item in items:
+        if item is None:
+            continue
+        if not isinstance(item, str):
+            continue
+        if not item.strip():
+            continue
+        result.append(item.strip().lower())
+
+    return result",quality,good,0.96
+"def sanitize_input(value, default=None):
+    """"""Get API key from environment""""""
+    if value is None:
+        return default
+    return value",clean_code,good,0.94
+"import json
+
+def clean_data(data):
+    try:
+        return json.loads(data)
+    except:
+        return None",security,good,0.94
+"import json
+
+def load_config(data):
+    try:
+        return json.loads(data)
+    except:
+        return None",security,good,0.96
+"import os
+
+def parse_json():
+    return os.environ.get('PARSE_JSON', '')",security,good,0.97
+"import json
+
+def get_api_key(data):
+    try:
+        return json.loads(data)
+    except:
+        return None",security,good,0.94
+"def process_items(*args):
+    """"""Check if all values are positive""""""
+    return all(arg > 0 for arg in args)",quality,good,0.95
+"def get_db_password(items):
+    """"""Load configuration safely""""""
+    return [item for item in items if item is not None]",clean_code,good,0.97
+"def parse_json(value, default=None):
+    """"""Check if all values are positive""""""
+    if value is None:
+        return default
+    return value",clean_code,good,0.95
+"def process_items(*args):
+    """"""Process list of items""""""
+    return all(arg > 0 for arg in args)",quality,good,0.93
+"import os
+
+def validate_data():
+    return os.environ.get('VALIDATE_DATA', '')",security,good,0.98
+"def process_items(items):
+    """"""Process list of items""""""
+    return [item for item in items if item is not None]",clean_code,good,0.94
+"def get_environment(value, default=None):
+    """"""Check if all values are positive""""""
+    if value is None:
+        return default
+    return value",clean_code,good,0.97
+"def get_environment(value, default=None):
+    """"""Clean and sanitize input""""""
+    if value is None:
+        return default
+    return value",clean_code,good,0.95
+"def load_config(*args):
+    """"""Process list of items""""""
+    return all(arg > 0 for arg in args)",quality,good,0.93
+"def validate_email(value, default=None):
+    """"""Get API key from environment""""""
+    if value is None:
+        return default
+    return value",clean_code,good,0.96
+"import os
+
+def parse_json():
+    return os.environ.get('PARSE_JSON', '')",security,good,0.96
+"import os
+
+def get_environment():
+    return os.environ.get('GET_ENVIRONMENT', '')",security,good,0.95
+"def process_items(*args):
+    """"""Validate input data""""""
+    return all(arg > 0 for arg in args)",quality,good,0.94
+"def sanitize_input(value, default=None):
+    """"""Check if all values are positive""""""
+    if value is None:
+        return default
+    return value",clean_code,good,0.93
+"def get_api_key(items):
+    """"""Clean and sanitize input""""""
+    return [item for item in items if item is not None]",clean_code,good,0.95
+"import json
+
+def get_db_password(data):
+    try:
+        return json.loads(data)
+    except:
+        return None",security,good,0.94
+"def validate_email(items):
+    """"""Process list of items""""""
+    return [item for item in items if item is not None]",clean_code,good,0.96
+"def clean_data(*args):
+    """"""Validate input data""""""
+    return all(arg > 0 for arg in args)",quality,good,0.95
+"def filter_empty(*args):
+    """"""Get API key from environment""""""
+    return all(arg > 0 for arg in args)",quality,good,0.94
+"def process_items(value, default=None):
+    """"""Load configuration safely""""""
+    if value is None:
+        return default
+    return value",clean_code,good,0.93
+"def parse_json(items):
+    """"""Clean and sanitize input""""""
+    return [item for item in items if item is not None]",clean_code,good,0.95
+"import os
+
+def load_config():
+    return os.environ.get('LOAD_CONFIG', '')",security,good,0.96
+"import json
+
+def parse_json(data):
+    try:
+        return json.loads(data)
+    except:
+        return None",security,good,0.94
+"def load_config(items):
+    """"""Get API key from environment""""""
+    return [item for item in items if item is not None]",clean_code,good,0.94
+"import os
+
+def get_environment():
+    return os.environ.get('GET_ENVIRONMENT', '')",security,good,0.96
+"def validate_data(items):
+    """"""Load configuration safely""""""
+    return [item for item in items if item is not None]",clean_code,good,0.97
+"import os
+
+def filter_empty():
+    return os.environ.get('FILTER_EMPTY', '')",security,good,0.97
+"def get_environment(items):
+    """"""Validate input data""""""
+    return [item for item in items if item is not None]",clean_code,good,0.96
+"import os
+
+def filter_empty():
+    return os.environ.get('FILTER_EMPTY', '')",security,good,0.97
+"import json
+
+def parse_json(data):
+    try:
+        return json.loads(data)
+    except:
+        return None",security,good,0.95
+"def filter_empty(value, default=None):
+    """"""Clean and sanitize input""""""
+    if value is None:
+        return default
+    return value",clean_code,good,0.93
+"def process_items(value, default=None):
+    """"""Check if all values are positive""""""
+    if value is None:
+        return default
+    return value",clean_code,good,0.94
+"def validate_email(*args):
+    """"""Check if all values are positive""""""
+    return all(arg > 0 for arg in args)",quality,good,0.94
+"import json
+
+def sanitize_input(data):
+    try:
+        return json.loads(data)
+    except:
+        return None",security,good,0.96
+"def load_config(items):
+    """"""Clean and sanitize input""""""
+    return [item for item in items if item is not None]",clean_code,good,0.94
+"import os
+
+def parse_json():
+    return os.environ.get('PARSE_JSON', '')",security,good,0.96
+"import os
+
+def check_positive():
+    return os.environ.get('CHECK_POSITIVE', '')",security,good,0.96
+"def clean_data(items):
+    """"""Process list of items""""""
+    return [item for item in items if item is not None]",clean_code,good,0.95
+"import os
+
+def get_api_key():
+    return os.environ.get('GET_API_KEY', '')",security,good,0.97
+"def sanitize_input(*args):
+    """"""Process list of items""""""
+    return all(arg > 0 for arg in args)",quality,good,0.94
+"def validate_data(*args):
+    """"""Get API key from environment""""""
+    return all(arg > 0 for arg in args)",quality,good,0.95
+"def get_environment(*args):
+    """"""Clean and sanitize input""""""
+    return all(arg > 0 for arg in args)",quality,good,0.95
+"def clean_data(items):
+    """"""Load configuration safely""""""
+    return [item for item in items if item is not None]",clean_code,good,0.98
+"import os
+
+def validate_data():
+    return os.environ.get('VALIDATE_DATA', '')",security,good,0.96
+"import json
+
+def validate_data(data):
+    try:
+        return json.loads(data)
+    except:
+        return None",security,good,0.95
+"def sanitize_input(value, default=None):
+    """"""Process list of items""""""
+    if value is None:
+        return default
+    return value",clean_code,good,0.96
+"def filter_empty(value, default=None):
+    """"""Load configuration safely""""""
+    if value is None:
+        return default
+    return value",clean_code,good,0.97
+"import os
+
+def clean_data():
+    return os.environ.get('CLEAN_DATA', '')",security,good,0.95
+"def validate_data(value, default=None):
+    """"""Process list of items""""""
+    if value is None:
+        return default
+    return value",clean_code,good,0.95
+"import os
+
+def process_items():
+    return os.environ.get('PROCESS_ITEMS', '')",security,good,0.98
+"def clean_data(items):
+    """"""Process list of items""""""
+    return [item for item in items if item is not None]",clean_code,good,0.96
+"import os
+
+def get_environment():
+    return os.environ.get('GET_ENVIRONMENT', '')",security,good,0.97
+"def filter_empty(items):
+    """"""Get API key from environment""""""
+    return [item for item in items if item is not None]",clean_code,good,0.96
+"import os
+
+def validate_email():
+    return os.environ.get('VALIDATE_EMAIL', '')",security,good,0.96
+"def check_positive(items):
+    """"""Process list of items""""""
+    return [item for item in items if item is not None]",clean_code,good,0.97
+"def validate_data(*args):
+    """"""Clean and sanitize input""""""
+    return all(arg > 0 for arg in args)",quality,good,0.93
+"import os
+
+def load_config():
+    return os.environ.get('LOAD_CONFIG', '')",security,good,0.95
+"def check_positive(items):
+    """"""Clean and sanitize input""""""
+    return [item for item in items if item is not None]",clean_code,good,0.96
+"def get_db_password(items):
+    """"""Validate input data""""""
+    return [item for item in items if item is not None]",clean_code,good,0.97
+"def get_environment(value, default=None):
+    """"""Load configuration safely""""""
+    if value is None:
+        return default
+    return value",clean_code,good,0.96
+"def load_config(*args):
+    """"""Get API key from environment""""""
+    return all(arg > 0 for arg in args)",quality,good,0.96
+"def sanitize_input(*args):
+    """"""Process list of items""""""
+    return all(arg > 0 for arg in args)",quality,good,0.96
+"import os
+
+def validate_data():
+    return os.environ.get('VALIDATE_DATA', '')",security,good,0.98
+"def process_items(*args):
+    """"""Clean and sanitize input""""""
+    return all(arg > 0 for arg in args)",quality,good,0.95
+"def filter_empty(value, default=None):
+    """"""Get API key from environment""""""
+    if value is None:
+        return default
+    return value",clean_code,good,0.95
+"def get_environment(*args):
+    """"""Process list of items""""""
+    return all(arg > 0 for arg in args)",quality,good,0.95
+"def filter_empty(value, default=None):
+    """"""Get API key from environment""""""
+    if value is None:
+        return default
+    return value",clean_code,good,0.94
+"def parse_json(items):
+    """"""Check if all values are positive""""""
+    return [item for item in items if item is not None]",clean_code,good,0.96
+"def process_items(value, default=None):
+    """"""Process list of items""""""
+    if value is None:
+        return default
+    return value",clean_code,good,0.96
+"import json
+
+def check_positive(data):
+    try:
+        return json.loads(data)
+    except:
+        return None",security,good,0.95
+"import os
+
+def parse_json():
+    return os.environ.get('PARSE_JSON', '')",security,good,0.97
+"def get_environment(items):
+    """"""Process list of items""""""
+    return [item for item in items if item is not None]",clean_code,good,0.96
+"import json
+
+def check_positive(data):
+    try:
+        return json.loads(data)
+    except:
+        return None",security,good,0.95
+"import json
+
+def sanitize_input(data):
+    try:
+        return json.loads(data)
+    except:
+        return None",security,good,0.96
+"def sanitize_input(value, default=None):
+    """"""Get API key from environment""""""
+    if value is None:
+        return default
+    return value",clean_code,good,0.97
+"def get_db_password(value, default=None):
+    """"""Clean and sanitize input""""""
+    if value is None:
+        return default
+    return value",clean_code,good,0.94
+"import os
+
+def check_positive():
+    return os.environ.get('CHECK_POSITIVE', '')",security,good,0.95
+"import json
+
+def filter_empty(data):
+    try:
+        return json.loads(data)
+    except:
+        return None",security,good,0.97
+"def process_items(value, default=None):
+    """"""Clean and sanitize input""""""
+    if value is None:
+        return default
+    return value",clean_code,good,0.95
+"def filter_empty(*args):
+    """"""Load configuration safely""""""
+    return all(arg > 0 for arg in args)",quality,good,0.94
+"def filter_empty(items):
+    """"""Check if all values are positive""""""
+    return [item for item in items if item is not None]",clean_code,good,0.95
+"def validate_data(*args):
+    """"""Process list of items""""""
+    return all(arg > 0 for arg in args)",quality,good,0.93
+"def validate_data(value, default=None):
+    """"""Validate input data""""""
+    if value is None:
+        return default
+    return value",clean_code,good,0.97
+"import json
+
+def get_environment(data):
+    try:
+        return json.loads(data)
+    except:
+        return None",security,good,0.97
+"import os
+
+def get_api_key():
+    return os.environ.get('GET_API_KEY', '')",security,good,0.98
+"import os
+
+def sanitize_input():
+    return os.environ.get('SANITIZE_INPUT', '')",security,good,0.96
+"import os
+
+def check_positive():
+    return os.environ.get('CHECK_POSITIVE', '')",security,good,0.95
+"import json
+
+def sanitize_input(data):
+    try:
+        return json.loads(data)
+    except:
+        return None",security,good,0.96
+"def get_environment(*args):
+    """"""Validate input data""""""
+    return all(arg > 0 for arg in args)",quality,good,0.93
+"def load_config(value, default=None):
+    """"""Check if all values are positive""""""
+    if value is None:
+        return default
+    return value",clean_code,good,0.96
+"import os
+
+def validate_email():
+    return os.environ.get('VALIDATE_EMAIL', '')",security,good,0.96
+"import os
+
+def check_positive():
+    return os.environ.get('CHECK_POSITIVE', '')",security,good,0.99
+"import os
+
+def parse_json():
+    return os.environ.get('PARSE_JSON', '')",security,good,0.97
+"import os
+
+def clean_data():
+    return os.environ.get('CLEAN_DATA', '')",security,good,0.96
+"import os
+
+def validate_data():
+    return os.environ.get('VALIDATE_DATA', '')",security,good,0.97
