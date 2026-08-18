@@ -1,30 +1,191 @@
-﻿body {
-    background-color: #f3f6ff;
-    color: #14213d;
+﻿/* ========== EXTENDED THEME VARIABLES FOR EXTERNAL STYLES ========== */
+:root {
+    /* Primary backgrounds */
+    --bg-primary: #f8fafc;
+    --bg-secondary: #f1f5f9;
+    
+    /* Surfaces & Containers */
+    --surface-default: #ffffff;
+    --surface-elevated: #ffffff;
+    --surface-muted: #f8fafc;
+    
+    /* Text Colors with proper contrast */
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-tertiary: #64748b;
+    --text-muted: #94a3b8;
+    
+    /* Borders */
+    --border-default: #e2e8f0;
+    --border-subtle: #cbd5e1;
+    
+    /* Accents */
+    --accent-primary: #4f46e5;
+    --accent-secondary: #06b6d4;
+    --accent-tertiary: #8b5cf6;
+    
+    /* Semantic Colors */
+    --semantic-danger: #dc2626;
+    --semantic-warning: #ea580c;
+    --semantic-success: #16a34a;
+    --semantic-info: #0284c7;
+    
+    /* Code highlighting */
+    --code-bg: #f8fafc;
+    --code-text: #0f172a;
+    
+    /* Form elements */
+    --input-bg: #ffffff;
+    --input-border: #e2e8f0;
+    --input-border-focus: #4f46e5;
+    --input-text: #0f172a;
+    --input-placeholder: #94a3b8;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    
+    /* Transitions */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark mode overrides */
+body[data-theme="dark"] {
+    --bg-primary: #0f172a;
+    --bg-secondary: #0d1b2a;
+    --surface-default: #1e293b;
+    --surface-elevated: #1e293b;
+    --surface-muted: #0f172a;
+    
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-tertiary: #94a3b8;
+    --text-muted: #64748b;
+    
+    --border-default: #334155;
+    --border-subtle: #475569;
+    
+    --accent-primary: #818cf8;
+    --accent-secondary: #22d3ee;
+    --accent-tertiary: #c084fc;
+    
+    --semantic-danger: #ef4444;
+    --semantic-warning: #f97316;
+    --semantic-success: #22c55e;
+    --semantic-info: #06b6d4;
+    
+    --code-bg: #0f172a;
+    --code-text: #e2e8f0;
+    
+    --input-bg: #1e293b;
+    --input-border: #334155;
+    --input-border-focus: #818cf8;
+    --input-text: #f8fafc;
+    --input-placeholder: #64748b;
+    
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+/* ========== UTILITY OVERRIDES ========== */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color var(--transition-slow), color var(--transition-slow);
 }
 
 .navbar-shell {
-    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.11);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-base);
 }
 
 .glass-card {
     border-radius: 18px;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-lg);
+}
+
+.glass-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl);
+}
+
+body[data-theme="dark"] .glass-card:hover {
+    box-shadow: 0 12px 40px rgba(129, 140, 248, 0.1);
 }
 
 .btn-immersive {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
 .btn-immersive:hover {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+}
+
+.btn-immersive:active {
+    transform: translateY(0);
 }
 
 .report-row {
-    transition: background-color 0.2s ease;
+    transition: background-color var(--transition-base);
 }
 
+code {
+    background-color: var(--code-bg);
+    color: var(--code-text);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+}
+
+pre {
+    background-color: var(--code-bg);
+    color: var(--code-text);
+}
+
+.alert {
+    transition: all var(--transition-base);
+    border-radius: 12px;
+}
+
+.badge {
+    transition: all var(--transition-base);
+}
+
+.form-control {
+    transition: all var(--transition-base);
+    background-color: var(--input-bg);
+    border-color: var(--input-border);
+    color: var(--input-text);
+}
+
+.form-control::placeholder {
+    color: var(--input-placeholder);
+}
+
+.form-control:focus {
+    border-color: var(--input-border-focus);
+    background-color: var(--input-bg);
+    color: var(--input-text);
+}
+
+/* ========== RESPONSIVE ADJUSTMENTS ========== */
 @media (max-width: 768px) {
     .glass-card {
         border-radius: 14px;
+    }
+    
+    .navbar-shell {
+        padding: 0.75rem 1rem !important;
+    }
+    
+    .btn-immersive {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
     }
 }
