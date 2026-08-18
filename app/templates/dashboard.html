@@ -62,25 +62,25 @@
                 {% if report %}
                     {% for item in report %}
                     <tr class="report-row {% if item.severity == 'critical' %}severity-critical{% elif item.severity == 'warning' %}severity-warning{% else %}severity-safe{% endif %}" data-severity="{{ item.severity }}">
-                        <td class="fw-bold text-center py-2" style="color: #212529 !important;"><code>{{ item.line }}</code></td>
+                        <td class="fw-bold text-center py-2" style="color: var(--text) !important;"><code>{{ item.line }}</code></td>
                         <td class="text-start py-2">
-                            <pre class="mb-0 p-2 bg-white rounded border border-secondary text-dark" style="font-size: 13px; color: #212529 !important; white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; direction: ltr; text-align: left;"><code style="color: #212529 !important;">{{ item.code }}</code></pre>
+                            <pre class="mb-0 p-2 rounded border" style="font-size: 13px; color: var(--code-text) !important; background-color: var(--code-bg) !important; white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; direction: ltr; text-align: left; border-color: var(--table-border) !important;"><code style="color: var(--code-text) !important;">{{ item.code }}</code></pre>
                         </td>
                         <td class="text-center py-2"><span class="badge bg-secondary p-2">{{ item.category }}</span></td>
                         <td class="text-center py-2"><span class="badge {% if item.status == 'السطر سليم برمجياً' %}bg-success{% elif item.status == 'تحذير' %}bg-warning{% else %}bg-danger{% endif %} p-2">{{ item.status }}</span></td>
-                        <td class="small text-start py-2" style="color: #212529 !important; line-height: 1.5;">
-                            <div class="issue-report-block p-2 rounded" style="border: 1px solid #e8eaed; background: #fafbfc; gap: 0.5rem; display: grid;">
-                                <div class="issue-target-block p-2 rounded" style="background: #ffffff; border: 1px solid #dee2e6;">
-                                    <div class="issue-target-label mb-1" style="font-weight: 700; color: #d63384;">🚨 التعليمة المخالفة</div>
-                                    <div class="issue-target-text" style="font-size: 0.95rem;">{{ item.target_statement | safe }}</div>
+                        <td class="small text-start py-2" style="color: var(--text) !important; line-height: 1.5;">
+                            <div class="issue-report-block p-2 rounded" style="border: 1px solid var(--table-border) !important; background: var(--surface-muted) !important; gap: 0.5rem; display: grid;">
+                                <div class="issue-target-block p-2 rounded" style="background: var(--surface-strong) !important; border: 1px solid var(--table-border) !important;">
+                                    <div class="issue-target-label mb-1" style="font-weight: 700; color: var(--danger);">🚨 التعليمة المخالفة</div>
+                                    <div class="issue-target-text" style="font-size: 0.95rem; color: var(--text);">{{ item.target_statement | safe }}</div>
                                 </div>
-                                <div class="issue-explanation-block p-2 rounded" style="background: #ffffff; border: 1px solid #dee2e6;">
-                                    <div class="issue-explanation-label mb-1" style="font-weight: 700; color: #0d6efd;">📝 شرح المشكلة</div>
-                                    <div class="issue-explanation-text" style="font-size: 0.93rem;">{{ item.explanation_text }}</div>
+                                <div class="issue-explanation-block p-2 rounded" style="background: var(--surface-strong) !important; border: 1px solid var(--table-border) !important;">
+                                    <div class="issue-explanation-label mb-1" style="font-weight: 700; color: var(--info);">📝 شرح المشكلة</div>
+                                    <div class="issue-explanation-text" style="font-size: 0.93rem; color: var(--text);">{{ item.explanation_text }}</div>
                                 </div>
-                                <div class="issue-recommendation-block p-2 rounded" style="background: #ffffff; border: 1px solid #dee2e6;">
-                                    <div class="issue-recommendation-label mb-1" style="font-weight: 700; color: #198754;">💡 التوصية والبديل</div>
-                                    <div class="issue-recommendation-text" style="font-size: 0.93rem;">{{ item.recommendation_text }}</div>
+                                <div class="issue-recommendation-block p-2 rounded" style="background: var(--surface-strong) !important; border: 1px solid var(--table-border) !important;">
+                                    <div class="issue-recommendation-label mb-1" style="font-weight: 700; color: var(--success);">💡 التوصية والبديل</div>
+                                    <div class="issue-recommendation-text" style="font-size: 0.93rem; color: var(--text);">{{ item.recommendation_text }}</div>
                                 </div>
                             </div>
                         </td>

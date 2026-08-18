@@ -34,77 +34,8 @@ def create_app():
     def review():
         if request.method == "POST":
             review_service = CodeReviewService()
-            source_code = ""
             filename = "analysis.py"
-            uploaded_files = request.files.getlist("code_files")
-
-            if uploaded_files:
-                results = []
-                for upload in uploaded_files:
-                    if upload and upload.filename:
-                        upload_path = os.path.join(
-                            Config.UPLOAD_FOLDER, upload.filename
-                        )
-                        upload.save(upload_path)
-                        with open(upload_path, "r", encoding="utf-8") as handle:
-                            source_code = handle.read()
-                        result = review_service.process_file_analysis(
-                            upload.filename, source_code
-                        )
-                        results.append(result)
-
-                if results:
-                    aggregate_scores = {
-                        "overall": int(
-                            sum(
-                                item.get("scores", {}).get("overall", 0)
-                                for item in results
-                            )
-                            / len(results)
-                        ),
-                        "security": int(
-                            sum(
-                                item.get("scores", {}).get("security", 0)
-                                for item in results
-                            )
-                            / len(results)
-                        ),
-                        "clean_code": int(
-                            sum(
-                                item.get("scores", {}).get("clean_code", 0)
-                                for item in results
-                            )
-                            / len(results)
-                        ),
-                        "quality": int(
-                            sum(
-                                item.get("scores", {}).get("quality", 0)
-                                for item in results
-                            )
-                            / len(results)
-                        ),
-                    }
-                    aggregated_report = []
-                    aggregated_recommendations = []
-                    total_issues = 0
-                    for item in results:
-                        aggregated_report.extend(item.get("report", []))
-                        aggregated_recommendations.extend(
-                            item.get("summary", {}).get("recommendations", [])
-                        )
-                        total_issues += item.get("summary", {}).get("total_issues", 0)
-                    return render_template(
-                        "dashboard.html",
-                        filename="multi_file_analysis",
-                        scores=aggregate_scores,
-                        confidence="0.00",
-                        report=aggregated_report,
-                        summary={
-                            "total_issues": total_issues,
-                            "recommendations": aggregated_recommendations[:8],
-                        },
-                    )
-
+            
             uploaded_file = request.files.get("code_file")
             if uploaded_file and uploaded_file.filename:
                 filename = uploaded_file.filename
@@ -127,20 +58,6 @@ def create_app():
                         report=[],
                         summary={"total_issues": 0, "recommendations": []},
                     )
-                return render_template(
-                    "dashboard.html",
-                    filename=filename,
-                    scores=result.get("scores", {}),
-                    confidence=result.get("avg_confidence", "0.00"),
-                    report=result.get("report", []),
-                    summary=result.get(
-                        "summary", {"total_issues": 0, "recommendations": []}
-                    ),
-                )
-
-            code_text = request.form.get("code_text", "")
-            if code_text.strip():
-                result = review_service.process_file_analysis(filename, code_text)
                 return render_template(
                     "dashboard.html",
                     filename=filename,
